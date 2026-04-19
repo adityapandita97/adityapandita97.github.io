@@ -1,141 +1,257 @@
-# adityapandita.com
+<div align="center">
 
-Personal portfolio website for **Aditya Pandita** — Solutions Architect II at Amazon Web Services.
+# Aditya Pandita
 
-## Live
+### Solutions Architect II — Amazon Web Services
 
-[adityapandita.com](https://adityapandita.com)
+**Serverless SME | Data & AI | Migration & Modernization | 5x AWS Certified**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/adityapandita97)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/adityapandita97)
+[![Portfolio](https://img.shields.io/badge/Portfolio-00e8c6?style=for-the-badge&logo=googlechrome&logoColor=black)](https://adityapandita.com)
+[![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:adityapandita97@gmail.com)
+
+---
+
+*Architecting the cloud infrastructure that powers nations.*
+
+</div>
 
 ## About
 
-Cloud Solutions Architect with 7+ years building enterprise-grade cloud infrastructure for government and public sector organizations. Serverless SME, 5x AWS Certified, with deep expertise in Data & AI, Migration & Modernization, and Security.
+Cloud Solutions Architect with 7+ years building enterprise-grade cloud infrastructure for government and public sector organizations across India. I specialize in designing serverless architectures, AI/ML platforms, data analytics pipelines, and end-to-end cloud migration strategies — delivering $5M+ annual revenue impact across 10+ government ministries and PSUs.
 
 **Education:** IIT Roorkee (Machine Learning) | IIM Kozhikode (MBA) | University of Western Australia | Murdoch University
 
-## Tech Stack
+---
 
-| Layer | Technology |
-|---|---|
-| **Markup** | HTML5, Semantic Elements |
-| **Styling** | CSS3 (Custom Properties, Grid, Flexbox, Animations) |
-| **Scripting** | Vanilla JavaScript (Canvas API, Intersection Observer, requestAnimationFrame) |
-| **Fonts** | Inter (body), JetBrains Mono (code/labels) — Google Fonts |
-| **Icons** | Font Awesome 6.4 |
-| **Hosting** | GitHub Pages |
-| **Domain** | Custom domain via CNAME |
-
-## Features
-
-- **Interactive Neural Network** — Canvas-based particle system in the hero section with mouse-reactive connections
-- **Animated AI Chip SVG** — Floating chip illustration with pulsing circuit traces and traveling data dots
-- **Circuit Board Dividers** — Animated SVG circuit traces with glowing junction nodes between sections
-- **Floating Background Icons** — Subtle drifting tech icons (microchip, brain, cloud, server) across the page
-- **Word-by-Word Reveal** — Scroll-triggered intro text animation with keyword highlighting
-- **Stats Counter** — Animated number counting on scroll into view
-- **Scroll Reveal** — Intersection Observer-based fade-in-up animations for all sections
-- **Glass Morphism Nav** — Sticky navigation with backdrop blur on scroll
-- **Responsive Design** — Fully responsive across desktop, tablet, and mobile breakpoints
-- **Service Tags** — AWS service pills on each expertise card
-
-## Sections
-
-### Hero
-Solutions Architect II title, animated tagline, CTA buttons, neural particle canvas, and floating AI chip.
-
-### About
-Word-by-word animated intro paragraph highlighting key terms (cloud, infrastructure, serverless, AI/ML, etc.).
-
-### Stats
-Key metrics — $5M+ revenue, 10+ government ministries, 5M+ smart meters, 42% cost reduction.
-
-### Technical Expertise
-
-Six domains, each with AWS service tags:
-
-1. **Serverless & Event-Driven** — Lambda, API Gateway, Step Functions, EventBridge, SQS, SNS, AppSync, DynamoDB, Fargate
-2. **AI/ML & Generative AI** — Bedrock, SageMaker, Rekognition, Lex, Comprehend, Textract, Kendra, Personalize, Forecast
-3. **Data & Analytics** — Redshift, QuickSight, Kinesis, Glue, Athena, EMR, Lake Formation, OpenSearch, MSK
-4. **Migration & Modernization** — MGN, DMS, Migration Hub, SCT, Application Discovery, Transfer Family, CloudEndure
-5. **Cloud Infra & Disaster Recovery** — EC2, ECS/EKS, VPC, Transit Gateway, Route 53, CloudFront, Direct Connect, Elastic DR, Backup, Aurora Global
-6. **Security & Compliance** — IAM, KMS, WAF, Shield, GuardDuty, Security Hub, Inspector, Macie, CloudTrail, Config
-
-### Industry Projects
-
-| # | Project | Domain | Highlights |
-|---|---|---|---|
-| 01 | **National Smart Grid Infrastructure** | Energy / Enterprise | 5M+ meters, 42% cost reduction, 99.9% uptime — with animated architecture diagram |
-| 02 | **MNRE Solar Rooftop AI Analysis** | AI/ML / Government | 3-stage image validation (Rekognition + vector search + SageMaker/Bedrock) for fraud prevention |
-| 03 | **Polaris — Energy Theft & Load Forecasting** | AI/ML / Energy | ML-based theft detection and demand forecasting for power utilities |
-| 04 | **AI Insights — DISCOM Capacity Planning** | GenAI / Open Source | Multi-agent Bedrock platform analyzing 411K+ records across 11 cities ([GitHub](https://github.com/adityapandita97/AI-Insights-DISCOM)) |
-| 05 | **Power Utilities Visualization Pipeline** | Data & Analytics | S3 → Lambda → Redshift → QuickSight ETL pipeline via CloudFormation ([GitHub](https://github.com/adityapandita97/Power-Utilities-Visualization-Project)) |
-| 06 | **Serverless RAG — Chat with PDF** | GenAI / Serverless | Bedrock (Titan + Claude) + OpenSearch Serverless vector store, deployed via CDK |
-| 07 | **IPv6 Smart Meter Migration** | Networking | Published on AWS Industries Blog — IoT-scale address migration |
-| 08 | **Enterprise Cloud Migration — NRL** | Migration / Enterprise | VMware to AWS via MGN/DMS, DR with lowest RPO/RTO |
-| 09 | **Serverless Computer Vision** | Serverless | Lambda + Rekognition + API Gateway — published on AWS Serverless Land |
-
-### Certifications
-
-- AWS Solutions Architect Professional
-- AWS Solutions Architect Associate
-- AWS Developer Associate
-- SME — Lambda & API Gateway
-- AWS GenAI Certified
-- AWS Well-Architected
-
-### Awards
-
-- "All Rounder" Award (2 consecutive quarters)
-- Rising Star Award
-- Bolster Award
-- AWS TFC Gold Member — Serverless & GenAI Communities
-
-### Notable Clients & Partners
-
-PGCIL, MNRE, PMSG Portal, Bureau of Energy Efficiency, DGH, RECL, NBFC, Nurmaligarh Refinery Ltd, GRID India, Polaris-Intellismart, EPFO, GSTN, Accenture, Deloitte, PwC, CMS, CT, BCG, and Fortune 500 enterprises.
-
-## Project Structure
+## Technical Expertise
 
 ```
-adityapandita97.github.io/
-├── CNAME              # Custom domain configuration
-├── README.md          # This file
-├── index.html         # Portfolio (AWS-branded light theme)
-├── index1.html        # Portfolio (Netflix dark theme v1)
-├── index2.html        # Portfolio (Netflix dark theme v2)
-└── index3.html        # Portfolio (Terminal Industries-inspired dark theme) ← current
+┌─────────────────────────────────┐  ┌─────────────────────────────────┐  ┌─────────────────────────────────┐
+│  ⚡ SERVERLESS & EVENT-DRIVEN   │  │  🧠 AI/ML & GENERATIVE AI       │  │  📊 DATA & ANALYTICS            │
+│                                 │  │                                 │  │                                 │
+│  AWS Lambda    API Gateway      │  │  Amazon Bedrock   SageMaker     │  │  Amazon Redshift  QuickSight    │
+│  Step Functions EventBridge     │  │  Rekognition      Lex           │  │  Kinesis          AWS Glue      │
+│  SQS  SNS  AppSync  DynamoDB   │  │  Comprehend       Textract      │  │  Athena           EMR           │
+│  Fargate                        │  │  Kendra  Personalize  Forecast  │  │  Lake Formation   OpenSearch    │
+└─────────────────────────────────┘  └─────────────────────────────────┘  └─────────────────────────────────┘
+┌─────────────────────────────────┐  ┌─────────────────────────────────┐  ┌─────────────────────────────────┐
+│  🔄 MIGRATION & MODERNIZATION  │  │  ☁️ CLOUD INFRA & DR             │  │  🛡️ SECURITY & COMPLIANCE       │
+│                                 │  │                                 │  │                                 │
+│  AWS MGN       DMS              │  │  EC2  ECS/EKS    VPC            │  │  IAM  KMS  WAF  Shield         │
+│  Migration Hub SCT              │  │  Transit Gateway  Route 53      │  │  GuardDuty    Security Hub      │
+│  Application Discovery          │  │  CloudFront  Direct Connect     │  │  Inspector    Macie             │
+│  Transfer Family  CloudEndure   │  │  Elastic DR  Backup  Aurora     │  │  CloudTrail   Config            │
+└─────────────────────────────────┘  └─────────────────────────────────┘  └─────────────────────────────────┘
 ```
 
-## Local Development
+---
 
-No build tools required — open `index3.html` directly in a browser:
+## Selected Projects
 
-```bash
-open index3.html
+### 01 — National Smart Grid Infrastructure `Energy` `Enterprise`
+
+Architected the cloud backbone for India's Advanced Metering Infrastructure (AMI) under PGCIL — enabling real-time monitoring, analytics, and management of **5M+ smart electricity meters** across the national grid.
+
+```
+Smart Meters (5M+)
+        │
+        ▼
+┌──────────────────────────┐
+│  IoT Core  │  API GW     │
+│  VPC       │  Security   │
+└──────────┬───────────────┘
+           ▼
+┌──────────────────────────┐
+│  Lambda    │  Kinesis     │
+│  SQS       │  Step Fn     │
+└──────────┬───────────────┘
+           ▼
+┌──────────────────────────┐
+│  DynamoDB  │  Timestream  │
+│  QuickSight Analytics    │
+└──────────────────────────┘
 ```
 
-Or use a local server:
+| Metric | Value |
+|--------|-------|
+| Meters Managed | **5M+** |
+| Cost Reduction | **42%** |
+| Uptime SLA | **99.9%** |
 
-```bash
-python3 -m http.server 8000
-# → http://localhost:8000/index3.html
+---
+
+### 02 — MNRE Solar Rooftop AI Analysis `AI/ML` `Government`
+
+Built a multi-stage AI image validation pipeline for India's rooftop solar subsidy program. Images submitted for subsidy claims pass through three automated checks:
+
+```
+MNRE Portal → S3 Upload
+                 │
+    ┌────────────┼────────────┐
+    ▼            ▼            ▼
+┌────────┐ ┌──────────┐ ┌──────────────┐
+│Quality │ │Duplicate │ │  Custom ML   │
+│Check   │ │Check     │ │  Checks      │
+│Rekog.  │ │Vector    │ │  Inclination │
+│        │ │Search/RDS│ │  Morphing    │
+└────┬───┘ └────┬─────┘ │  SageMaker   │
+     │          │       │  Bedrock LLM │
+     ▼          ▼       └──────┬───────┘
+     └──────────┴──────────────┘
+                 │
+                 ▼
+        Status: Accepted / Rejected
 ```
 
-## Deployment
+> **Services:** Step Functions, Rekognition, SageMaker AI, Bedrock, RDS (pgvector), S3, Lambda
 
-Hosted on GitHub Pages. Push to `main` to deploy:
+---
 
-```bash
-git add .
-git commit -m "update portfolio"
-git push origin main
+### 03 — Polaris — Energy Theft & Load Forecasting `AI/ML` `Energy`
+
+ML use cases for power utilities — anomaly-based theft detection to identify tampered meters and unauthorized consumption, and demand forecasting for capacity planning across distribution networks.
+
+| Use Case | Approach |
+|----------|----------|
+| Theft Detection | Anomaly models on meter reading patterns |
+| Load Forecasting | Time-series prediction for grid demand |
+
+---
+
+### 04 — AI Insights — DISCOM Capacity Planning `GenAI` `Open Source`
+
+End-to-end AI-powered capacity planning for power distribution companies analyzing four growth vectors across **411K+ records** and **11 cities**.
+
+```
+┌──────────────────────────────────────────┐
+│           Data Sources (411K+ records)    │
+│  DT Meters │ EV Charging │ Solar │ BESS  │
+└──────────────────┬───────────────────────┘
+                   ▼
+┌──────────────────────────────────────────┐
+│         5x Lambda Functions              │
+│  DT Forecast │ EV │ Solar │ Capacity │   │
+│              Chat Orchestrator           │
+└──────────────────┬───────────────────────┘
+                   ▼
+┌──────────────────────────────────────────┐
+│  React Dashboard  │  Multi-Agent AI Chat │
+│  Chart.js KPIs    │  Bedrock Claude      │
+└──────────────────────────────────────────┘
 ```
 
-## Contact
+> **Stack:** Lambda, DynamoDB, Bedrock (Claude), API Gateway, React, Chart.js, CloudFormation
 
-- **Email:** adityapandita97@gmail.com
-- **LinkedIn:** [linkedin.com/in/adityapandita97](https://linkedin.com/in/adityapandita97)
-- **GitHub:** [github.com/adityapandita97](https://github.com/adityapandita97)
+[![View on GitHub](https://img.shields.io/badge/View_Source-GitHub-181717?style=flat-square&logo=github)](https://github.com/adityapandita97/AI-Insights-DISCOM)
 
-## License
+---
 
-All rights reserved. This is a personal portfolio — not intended for redistribution.
+### 05 — Power Utilities Visualization Pipeline `Data & Analytics` `Open Source`
+
+Automated IaC solution — CloudFormation deploys an end-to-end ETL pipeline analyzing interval meter readings at 15-minute granularity.
+
+```
+CSV (S3) → Lambda (Python) → Redshift → QuickSight Dashboards
+```
+
+> **Stack:** CloudFormation (24 resources), S3, Lambda, Redshift, QuickSight, VPC, IAM
+
+[![View on GitHub](https://img.shields.io/badge/View_Source-GitHub-181717?style=flat-square&logo=github)](https://github.com/adityapandita97/Power-Utilities-Visualization-Project)
+
+---
+
+### 06 — Serverless RAG — Chat with PDF `GenAI` `Serverless`
+
+Fully serverless Retrieval Augmented Generation system — upload a PDF, ask questions in plain English, get answers grounded in the actual document with zero hallucinations.
+
+```
+PDF → S3 → Lambda (chunking + embedding)
+                    │
+                    ▼
+         OpenSearch Serverless
+           (vector store)
+                    │
+      User Query →  ▼
+         Bedrock (Titan Embeddings + Claude)
+                    │
+                    ▼
+            Grounded Answer
+```
+
+> **Stack:** S3, Lambda, Bedrock (Titan + Claude 3 Haiku), OpenSearch Serverless, API Gateway, CDK
+
+---
+
+### 07 — IPv6 Smart Meter Migration `Networking` `Published`
+
+Designed the IPv6 migration strategy for IoT-scale smart meter networks — solving address exhaustion for millions of connected devices. **Published on the AWS Industries Blog.**
+
+---
+
+### 08 — Enterprise Cloud Migration — NRL `Migration` `Enterprise`
+
+End-to-end migration of Nurmaligarh Refinery's VMware infrastructure to AWS — modernizing legacy workloads using MGN and DMS, with DR strategies achieving lowest RPO/RTO targets.
+
+---
+
+### 09 — Serverless Computer Vision `Serverless` `Published`
+
+End-to-end serverless image analysis using Lambda, Rekognition, and API Gateway. **Published on AWS Serverless Land.**
+
+---
+
+## Certifications
+
+<div align="center">
+
+| Certification | Domain |
+|:---:|:---:|
+| **AWS Solutions Architect Professional** | Cloud Architecture |
+| **AWS Solutions Architect Associate** | Cloud Architecture |
+| **AWS Developer Associate** | Development |
+| **SME — Lambda & API Gateway** | Serverless |
+| **AWS GenAI Certified** | Generative AI |
+| **AWS Well-Architected** | Best Practices |
+
+</div>
+
+---
+
+## Recognition
+
+| Award | Details |
+|-------|---------|
+| "All Rounder" Award | 2 consecutive quarters |
+| Rising Star Award | — |
+| Bolster Award | — |
+| AWS TFC Gold Member | Serverless & GenAI/ML Communities |
+
+---
+
+## Key Impact
+
+<div align="center">
+
+| $5M+ | 10+ | 5M+ | 42% |
+|:---:|:---:|:---:|:---:|
+| Annual Revenue | Govt Ministries & PSUs | Smart Meters Managed | Cost Reduction |
+
+</div>
+
+---
+
+## Notable Clients & Partners
+
+PGCIL · MNRE · PMSG Portal · Bureau of Energy Efficiency · DGH · RECL · NBFC · Nurmaligarh Refinery · GRID India · Polaris-Intellismart · EPFO · GSTN · Accenture · Deloitte · PwC · CMS · CT · BCG
+
+---
+
+<div align="center">
+
+**[adityapandita.com](https://adityapandita.com)**
+
+*Built with HTML5, CSS3, and vanilla JavaScript. No frameworks, no dependencies.*
+
+</div>
