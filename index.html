@@ -3,860 +3,1453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aditya Pandita - Solutions Architect @ AWS</title>
+    <title>Aditya Pandita — Cloud Solutions Architect</title>
+    <meta name="description" content="Cloud Solutions Architect with 7+ years building enterprise cloud infrastructure for government and public sector. $5M+ revenue impact.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-primary: #060d18;
+            --bg-secondary: #0c1829;
+            --bg-tertiary: #111f35;
+            --bg-card: #0f1a2e;
+            --accent-primary: #00e8c6;
+            --accent-secondary: #ff6b35;
+            --accent-tertiary: #7c5cff;
+            --text-primary: #f0f4f8;
+            --text-secondary: #8899aa;
+            --text-muted: #4a5e73;
+            --border-color: rgba(255,255,255,0.06);
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --section-padding: clamp(4rem, 10vw, 8rem);
+            --container-max: 1280px;
         }
 
-        :root {
-            --primary-color: #FF9900;
-            --secondary-color: #232F3E;
-            --accent-color: #146EB4;
-            --text-color: #232F3E;
-            --light-bg: #F9F9F9;
-            --white: #FFFFFF;
-            --gray: #666666;
-            --light-gray: #E5E5E5;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: var(--font-primary);
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
-            color: var(--text-color);
             overflow-x: hidden;
         }
 
+        ::selection { background: var(--accent-primary); color: var(--bg-primary); }
+
         .container {
-            max-width: 1200px;
+            max-width: var(--container-max);
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 clamp(1.5rem, 4vw, 4rem);
         }
 
-        /* Navigation */
-        .navbar {
-            background: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+        /* ============ NAVIGATION ============ */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1.25rem 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 20px;
+        .nav.scrolled {
+            background: rgba(6, 13, 24, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 0;
         }
-
-        .nav-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--secondary-color);
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo {
+            font-family: var(--font-mono); font-size: 1.125rem; font-weight: 600;
+            color: var(--text-primary); text-decoration: none; letter-spacing: -0.02em;
         }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
+        .nav-logo span { color: var(--accent-primary); }
+        .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500;
+            color: var(--text-secondary); text-decoration: none; text-transform: uppercase;
+            letter-spacing: 0.1em; transition: color 0.3s ease; position: relative;
         }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: color 0.3s;
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 1px; background: var(--accent-primary); transition: width 0.3s ease;
         }
-
-        .nav-menu a:hover {
-            color: var(--primary-color);
+        .nav-links a:hover { color: var(--accent-primary); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600;
+            color: var(--bg-primary) !important; background: var(--accent-primary);
+            padding: 0.625rem 1.5rem; border-radius: 100px; text-transform: uppercase;
+            letter-spacing: 0.1em; transition: all 0.3s ease;
         }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
+        .nav-cta:hover { background: #fff; color: var(--bg-primary) !important; transform: translateY(-1px); }
+        .nav-cta::after { display: none !important; }
+        .nav-hamburger {
+            display: none; flex-direction: column; gap: 6px;
+            cursor: pointer; padding: 4px; z-index: 1001;
         }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--secondary-color);
-            margin: 3px 0;
-            transition: 0.3s;
+        .nav-hamburger span {
+            display: block; width: 24px; height: 2px; background: var(--text-primary);
+            transition: all 0.3s ease; border-radius: 2px;
         }
+        .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+        .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
-        /* Hero Section */
+        /* ============ HERO ============ */
         .hero {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
-            color: var(--white);
-            padding: 150px 0 100px;
-            margin-top: 60px;
+            min-height: 100vh; display: flex; align-items: center;
+            position: relative; overflow: hidden; padding-top: 6rem;
         }
 
-        .hero-content {
-            text-align: center;
+        #heroCanvas {
+            position: absolute; inset: 0; z-index: 1;
         }
+
+        .hero-chip-visual {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: clamp(300px, 35vw, 550px);
+            height: clamp(300px, 35vw, 550px);
+            z-index: 2;
+            opacity: 0;
+            animation: chip-fade-in 1.5s ease 0.5s forwards;
+        }
+
+        @keyframes chip-fade-in {
+            to { opacity: 1; }
+        }
+
+        .chip-svg {
+            width: 100%;
+            height: 100%;
+            animation: chip-float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 40px rgba(0, 232, 198, 0.15));
+        }
+
+        @keyframes chip-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+        }
+
+        .hero-grid-overlay {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 232, 198, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 232, 198, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 1;
+            mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 70%);
+        }
+
+        .hero-content { position: relative; z-index: 3; max-width: 650px; }
+
+        .hero-label {
+            font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500;
+            color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.2em;
+            margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;
+            opacity: 0; transform: translateY(20px);
+            animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+        }
+        .hero-label::before { content: ''; width: 2rem; height: 1px; background: var(--accent-primary); }
 
         .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
+            font-size: clamp(2.75rem, 5.5vw, 4.5rem); font-weight: 700;
+            line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 1.75rem;
+            opacity: 0; transform: translateY(30px);
+            animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
         }
+        .hero-title .accent { color: var(--accent-primary); }
+        .hero-title .line { display: block; }
 
         .hero-subtitle {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            animation: fadeInUp 1s ease 0.2s backwards;
+            font-size: clamp(1rem, 1.3vw, 1.15rem); color: var(--text-secondary);
+            line-height: 1.7; max-width: 550px; margin-bottom: 2.5rem;
+            opacity: 0; transform: translateY(30px);
+            animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
         }
 
-        .hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.4s backwards;
+        .hero-actions {
+            display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+            opacity: 0; transform: translateY(30px);
+            animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.6s backwards;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
-        }
+        @keyframes fade-in-up { to { opacity: 1; transform: translateY(0); } }
 
         .btn-primary {
-            background: var(--primary-color);
-            color: var(--white);
+            font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 600;
+            color: var(--bg-primary); background: var(--accent-primary);
+            padding: 0.875rem 2rem; border: none; border-radius: 100px;
+            text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em;
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex; align-items: center; gap: 0.5rem;
         }
-
         .btn-primary:hover {
-            background: #E88B00;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 153, 0, 0.3);
+            background: #fff; transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 232, 198, 0.25);
         }
-
         .btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
+            font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500;
+            color: var(--text-secondary); padding: 0.875rem 2rem;
+            border: 1px solid var(--border-color); border-radius: 100px;
+            text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .btn-secondary:hover { color: var(--accent-primary); border-color: var(--accent-primary); transform: translateY(-2px); }
+
+        .hero-scroll-indicator {
+            position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+            z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+            opacity: 0; animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+        }
+        .hero-scroll-indicator span {
+            font-family: var(--font-mono); font-size: 0.625rem;
+            text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-muted);
+        }
+        .scroll-line {
+            width: 1px; height: 40px;
+            background: linear-gradient(to bottom, var(--accent-primary), transparent);
+            animation: scroll-pulse 2s ease-in-out infinite;
+        }
+        @keyframes scroll-pulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
+            50% { opacity: 1; transform: scaleY(1); }
         }
 
-        .btn-secondary:hover {
-            background: var(--white);
-            color: var(--secondary-color);
+        /* ============ FLOATING ELEMENTS ============ */
+        .floating-elements {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
         }
-
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            animation: fadeInUp 1s ease 0.8s backwards;
-        }
-
-        .social-links a {
-            color: var(--white);
+        .floating-icon {
+            position: absolute;
+            color: rgba(0, 232, 198, 0.06);
             font-size: 1.5rem;
-            transition: all 0.3s;
+            animation: float-drift linear infinite;
+        }
+        @keyframes float-drift {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
 
-        .social-links a:hover {
-            color: var(--primary-color);
-            transform: translateY(-3px);
+        /* ============ CIRCUIT TRACE DIVIDERS ============ */
+        .circuit-divider {
+            position: relative; height: 80px; overflow: hidden;
+        }
+        .circuit-divider svg { width: 100%; height: 100%; }
+        .circuit-trace {
+            stroke: var(--accent-primary); stroke-width: 1.5;
+            fill: none; opacity: 0.15;
+            stroke-dasharray: 8 4;
+            animation: trace-flow 3s linear infinite;
+        }
+        .circuit-dot {
+            fill: var(--accent-primary); opacity: 0.4;
+        }
+        .circuit-dot-glow {
+            fill: var(--accent-primary); opacity: 0.15;
+        }
+        @keyframes trace-flow {
+            to { stroke-dashoffset: -24; }
         }
 
-        /* Section Styles */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--secondary-color);
+        /* ============ DATA FLOW SECTION ============ */
+        .data-flow-section {
             position: relative;
+            padding: 6rem 0;
+            overflow: hidden;
+        }
+        .data-flow-bg {
+            position: absolute; inset: 0; z-index: 0;
+        }
+        .data-stream {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--accent-primary), transparent);
+            opacity: 0.08;
+            animation: stream-fall linear infinite;
+        }
+        @keyframes stream-fall {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--primary-color);
-            margin: 1rem auto;
+        /* ============ SECTION COMMON ============ */
+        .section { padding: var(--section-padding) 0; position: relative; }
+        .section-label {
+            font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 600;
+            color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.2em;
+            margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;
+        }
+        .section-label::before { content: ''; width: 1.5rem; height: 1px; background: var(--accent-primary); }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700;
+            line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 1.5rem;
+        }
+        .section-description {
+            font-size: clamp(1rem, 1.25vw, 1.125rem); color: var(--text-secondary);
+            line-height: 1.7; max-width: 600px;
+        }
+        .reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============ INTRO / ABOUT ============ */
+        .intro { padding: var(--section-padding) 0; border-bottom: 1px solid var(--border-color); position: relative; }
+        .intro-text {
+            font-size: clamp(1.5rem, 3.2vw, 2.75rem); font-weight: 400;
+            line-height: 1.35; letter-spacing: -0.015em; max-width: 1000px;
+        }
+        .intro-text .word { display: inline-block; color: var(--text-muted); transition: color 0.5s ease; }
+        .intro-text .word.active { color: var(--text-primary); }
+        .intro-text .word.highlight { color: var(--accent-primary); }
+
+        /* ============ STATS BAR ============ */
+        .stats-bar {
+            padding: 4rem 0; border-bottom: 1px solid var(--border-color);
+            background: var(--bg-secondary); position: relative; overflow: hidden;
+        }
+        .stats-bar-circuit {
+            position: absolute; inset: 0; opacity: 0.04;
+            background-image:
+                radial-gradient(circle at 20% 50%, var(--accent-primary) 1px, transparent 1px),
+                radial-gradient(circle at 80% 30%, var(--accent-primary) 1px, transparent 1px),
+                radial-gradient(circle at 60% 70%, var(--accent-primary) 1px, transparent 1px);
+            background-size: 100px 100px, 150px 150px, 120px 120px;
+        }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; position: relative; z-index: 1; }
+        .stat-item { text-align: center; position: relative; }
+        .stat-item:not(:last-child)::after {
+            content: ''; position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+            width: 1px; height: 60%; background: var(--border-color);
+        }
+        .stat-number {
+            font-family: var(--font-mono); font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700; color: var(--accent-primary); line-height: 1; margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-secondary);
+            text-transform: uppercase; letter-spacing: 0.1em;
         }
 
-        /* About Section */
-        .about {
-            background: var(--light-bg);
+        /* ============ EXPERTISE ============ */
+        .expertise-section { position: relative; overflow: hidden; }
+        .expertise-section .circuit-bg {
+            position: absolute; inset: 0; z-index: 0; pointer-events: none;
+        }
+        .expertise-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+            background: var(--border-color); margin-top: 3rem;
+            border: 1px solid var(--border-color); position: relative; z-index: 1;
+        }
+        .expertise-card {
+            background: var(--bg-primary); padding: clamp(1.5rem, 3vw, 2.5rem);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden;
+        }
+        .expertise-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 2px; background: var(--accent-primary);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .expertise-card:hover::before { transform: scaleX(1); }
+        .expertise-card:hover { background: var(--bg-secondary); }
+        .expertise-card-bg-icon {
+            position: absolute; right: -10px; bottom: -10px;
+            font-size: 5rem; opacity: 0.03; color: var(--accent-primary);
+            transition: all 0.4s ease;
+        }
+        .expertise-card:hover .expertise-card-bg-icon { opacity: 0.08; transform: scale(1.1); }
+        .expertise-icon {
+            font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 600;
+            color: var(--accent-primary); margin-bottom: 1.25rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .expertise-icon i { font-size: 1.25rem; }
+        .expertise-card h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
+        .expertise-card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+        .expertise-services {
+            display: flex; flex-wrap: wrap; gap: 0.375rem; margin-top: 1rem;
+        }
+        .service-tag {
+            font-family: var(--font-mono); font-size: 0.6rem; font-weight: 500;
+            color: var(--text-muted); background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color); padding: 0.2rem 0.5rem;
+            border-radius: 4px; transition: all 0.3s ease; white-space: nowrap;
+        }
+        .expertise-card:hover .service-tag {
+            border-color: rgba(0, 232, 198, 0.15); color: var(--text-secondary);
         }
 
-        .about-text p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-            color: var(--gray);
-        }
-
-        .about-highlights {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .highlight-item {
-            text-align: center;
-            padding: 2rem;
-            background: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .highlight-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .highlight-item h3 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .highlight-item p {
-            color: var(--gray);
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .skill-card i {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .skill-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--secondary-color);
-        }
-
-        .skill-card p {
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-
-        /* Projects Section */
-        .projects {
-            background: var(--light-bg);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
+        /* ============ PROJECTS ============ */
+        .projects-section { background: var(--bg-secondary); position: relative; overflow: hidden; }
+        .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
         .project-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
+            background: var(--bg-primary); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: clamp(1.5rem, 3vw, 2.5rem);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden; display: flex; flex-direction: column;
         }
-
+        .project-card::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(0, 232, 198, 0.03) 0%, transparent 50%);
+            opacity: 0; transition: opacity 0.5s ease;
+        }
+        .project-card:hover::before { opacity: 1; }
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: rgba(0, 232, 198, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
-
+        .project-card.featured {
+            grid-column: 1 / -1; display: grid;
+            grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;
+        }
         .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1rem;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 1.25rem; position: relative; z-index: 1;
         }
-
-        .project-header h3 {
-            font-size: 1.3rem;
-            color: var(--secondary-color);
-            flex: 1;
-        }
-
+        .project-number { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
+        .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
         .project-tag {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-family: var(--font-mono); font-size: 0.625rem; font-weight: 500;
+            color: var(--accent-primary); background: rgba(0, 232, 198, 0.08);
+            padding: 0.25rem 0.625rem; border-radius: 100px;
+            text-transform: uppercase; letter-spacing: 0.05em;
         }
-
-        .project-card p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+        .project-tag.orange { color: var(--accent-secondary); background: rgba(255, 107, 53, 0.08); }
+        .project-tag.purple { color: var(--accent-tertiary); background: rgba(124, 92, 255, 0.08); }
+        .project-content { position: relative; z-index: 1; flex: 1; }
+        .project-content h3 {
+            font-size: clamp(1.125rem, 1.5vw, 1.375rem); font-weight: 600;
+            margin-bottom: 0.75rem; letter-spacing: -0.01em; line-height: 1.3;
         }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-tech span {
-            background: var(--light-bg);
-            padding: 0.4rem 0.8rem;
-            border-radius: 5px;
-            font-size: 0.85rem;
-            color: var(--accent-color);
-            font-weight: 500;
-        }
-
+        .project-content p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 1.25rem; }
+        .project-metrics { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+        .project-metric { display: flex; flex-direction: column; }
+        .project-metric-value { font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: var(--accent-primary); }
+        .project-metric-label { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
         .project-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: color 0.3s;
+            font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500;
+            color: var(--text-secondary); text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease;
         }
+        .project-link:hover { color: var(--accent-primary); gap: 0.75rem; }
 
-        .project-link:hover {
-            color: var(--primary-color);
+        /* Featured project visual: animated architecture */
+        .project-visual {
+            position: relative; z-index: 1; background: var(--bg-secondary);
+            border: 1px solid var(--border-color); border-radius: 8px;
+            padding: 1.5rem; min-height: 280px; overflow: hidden;
         }
-
-        /* Certifications Section */
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+        .project-visual-canvas { position: absolute; inset: 0; z-index: 0; }
+        .arch-flow {
+            position: relative; z-index: 1; display: flex; flex-direction: column;
+            align-items: center; gap: 0.5rem; width: 100%;
         }
+        .arch-layer {
+            display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
+            width: 100%;
+        }
+        .arch-box {
+            font-family: var(--font-mono); font-size: 0.6rem; font-weight: 500;
+            padding: 0.5rem 0.75rem; border: 1px solid var(--border-color);
+            border-radius: 6px; color: var(--text-secondary); background: rgba(6, 13, 24, 0.9);
+            text-align: center; transition: all 0.3s ease; position: relative;
+            backdrop-filter: blur(4px);
+        }
+        .arch-box.glow {
+            border-color: rgba(0, 232, 198, 0.3); color: var(--accent-primary);
+            box-shadow: 0 0 15px rgba(0, 232, 198, 0.1);
+        }
+        .arch-box.glow::after {
+            content: ''; position: absolute; inset: -1px;
+            border-radius: 6px; border: 1px solid rgba(0, 232, 198, 0.15);
+            animation: box-pulse 2s ease-in-out infinite;
+        }
+        @keyframes box-pulse {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.03); }
+        }
+        .arch-arrow {
+            width: 1px; height: 20px; position: relative; margin: 0 auto;
+        }
+        .arch-arrow::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to bottom, var(--accent-primary), transparent);
+            opacity: 0.3;
+        }
+        .arch-arrow .data-dot {
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 4px; height: 4px; border-radius: 50%;
+            background: var(--accent-primary); opacity: 0.8;
+            animation: dot-travel 1.5s ease-in-out infinite;
+        }
+        @keyframes dot-travel {
+            0% { top: 0; opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .arch-arrow:nth-child(4) .data-dot { animation-delay: 0.3s; }
+        .arch-arrow:nth-child(6) .data-dot { animation-delay: 0.6s; }
+        .arch-arrow:nth-child(8) .data-dot { animation-delay: 0.9s; }
 
+        /* ============ CERTIFICATIONS ============ */
+        .certs-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem; margin-top: 3rem;
+        }
         .cert-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: all 0.3s;
+            background: var(--bg-secondary); border: 1px solid var(--border-color);
+            border-radius: 10px; padding: 1.5rem; display: flex;
+            align-items: flex-start; gap: 1rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .cert-card:hover { border-color: rgba(0, 232, 198, 0.15); transform: translateY(-2px); }
+        .cert-icon {
+            width: 40px; height: 40px; min-width: 40px;
+            background: rgba(0, 232, 198, 0.08); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--accent-primary); font-size: 1rem;
+        }
+        .cert-info h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 0.25rem; letter-spacing: -0.01em; }
+        .cert-info p { font-size: 0.8125rem; color: var(--text-secondary); }
+
+        /* ============ AWARDS ============ */
+        .awards-list { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+        .award-item {
+            font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary);
+            padding: 0.625rem 1.25rem; border: 1px solid var(--border-color);
+            border-radius: 100px; display: inline-flex; align-items: center;
+            gap: 0.5rem; transition: all 0.3s ease;
+        }
+        .award-item:hover { border-color: var(--accent-secondary); color: var(--accent-secondary); }
+        .award-item i { color: var(--accent-secondary); }
+
+        /* ============ CONTACT ============ */
+        .contact-section { background: var(--bg-secondary); border-top: 1px solid var(--border-color); position: relative; overflow: hidden; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+        .contact-text h3 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 700;
+            line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.25rem;
+        }
+        .contact-text p { font-size: 1rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem; }
+        .contact-links { display: flex; flex-direction: column; gap: 1.25rem; }
+        .contact-link {
+            display: flex; align-items: center; gap: 1rem; text-decoration: none;
+            color: var(--text-primary); font-size: 0.9375rem; transition: all 0.3s ease;
+        }
+        .contact-link:hover { color: var(--accent-primary); }
+        .contact-link-icon {
+            width: 44px; height: 44px; min-width: 44px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(0, 232, 198, 0.06); border: 1px solid var(--border-color);
+            border-radius: 10px; color: var(--accent-primary); font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .contact-link:hover .contact-link-icon {
+            background: rgba(0, 232, 198, 0.12); border-color: rgba(0, 232, 198, 0.2);
         }
 
-        .cert-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        .contact-visual { position: relative; }
+        .contact-card-visual {
+            background: var(--bg-primary); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 2.5rem; position: relative; overflow: hidden;
+        }
+        .contact-card-visual::before {
+            content: ''; position: absolute; top: -50%; right: -50%;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0, 232, 198, 0.05) 0%, transparent 60%);
+        }
+        .contact-chip-icon {
+            position: absolute; top: 1.5rem; right: 1.5rem;
+            width: 60px; height: 60px; opacity: 0.06;
+        }
+        .contact-card-name { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; position: relative; }
+        .contact-card-role {
+            font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-primary);
+            text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; position: relative;
+        }
+        .contact-card-divider { width: 100%; height: 1px; background: var(--border-color); margin-bottom: 1.5rem; position: relative; }
+        .contact-card-detail {
+            font-family: var(--font-mono); font-size: 0.8125rem; color: var(--text-secondary);
+            margin-bottom: 0.75rem; position: relative;
         }
 
-        .cert-card i {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+        /* ============ FOOTER ============ */
+        .footer { padding: 3rem 0; border-top: 1px solid var(--border-color); }
+        .footer-inner { display: flex; align-items: center; justify-content: space-between; }
+        .footer-copy { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); }
+        .footer-socials { display: flex; gap: 1rem; }
+        .footer-socials a {
+            width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border-color); border-radius: 8px;
+            color: var(--text-secondary); text-decoration: none; font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        .footer-socials a:hover {
+            color: var(--accent-primary); border-color: rgba(0, 232, 198, 0.2);
+            background: rgba(0, 232, 198, 0.06);
         }
 
-        .cert-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--secondary-color);
+        /* ============ MOBILE MENU ============ */
+        .mobile-menu {
+            display: none; position: fixed; inset: 0; background: var(--bg-primary);
+            z-index: 999; flex-direction: column; justify-content: center; padding: 2rem;
+            opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        .cert-card p {
-            color: var(--gray);
+        .mobile-menu.active { opacity: 1; visibility: visible; }
+        .mobile-menu a {
+            font-family: var(--font-mono); font-size: 1.5rem; font-weight: 600;
+            color: var(--text-primary); text-decoration: none; padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color); display: block;
+            text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.3s ease;
         }
+        .mobile-menu a:hover { color: var(--accent-primary); }
 
-        .achievements {
-            background: var(--light-bg);
-            padding: 2rem;
-            border-radius: 10px;
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .nav-links { display: none; }
+            .nav-hamburger { display: flex; }
+            .mobile-menu { display: flex; }
+            .hero-chip-visual { display: none; }
+            .hero-content { max-width: 100%; }
+            .expertise-grid { grid-template-columns: repeat(2, 1fr); }
+            .projects-grid { grid-template-columns: 1fr; }
+            .project-card.featured { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
         }
-
-        .achievements h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary-color);
-            text-align: center;
-        }
-
-        .achievements ul {
-            list-style: none;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .achievements li {
-            padding: 1rem;
-            margin-bottom: 0.5rem;
-            background: var(--white);
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .achievements i {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: var(--light-bg);
-        }
-
-        .contact-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: var(--gray);
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-item i {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-        }
-
-        .contact-item a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contact-item a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--secondary-color);
-            color: var(--white);
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .footer-links a {
-            color: var(--white);
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 60px;
-                flex-direction: column;
-                background: var(--white);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
-                padding: 2rem 0;
-            }
-
-            .nav-menu.active {
-                left: 0;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.3rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .projects-grid,
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+            .stat-item:nth-child(2)::after { display: none; }
+            .expertise-grid { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
         }
-
         @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .about-highlights {
-                grid-template-columns: 1fr;
-            }
+            .stats-grid { grid-template-columns: 1fr; }
+            .stat-item::after { display: none !important; }
+            .hero-actions { flex-direction: column; align-items: flex-start; width: 100%; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Floating Background Icons -->
+    <div class="floating-elements" id="floatingElements"></div>
+
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">Aditya Pandita</div>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
+    <nav class="nav" id="nav">
+        <div class="container nav-inner">
+            <a href="#" class="nav-logo">aditya<span>.</span>pandita</a>
+            <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
+                <li><a href="#expertise">Expertise</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#certifications">Credentials</a></li>
+                <li><a href="#contact" class="nav-cta">Contact</a></li>
             </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="nav-hamburger" id="hamburger">
+                <span></span><span></span><span></span>
             </div>
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#expertise" class="mobile-link">Expertise</a>
+        <a href="#projects" class="mobile-link">Projects</a>
+        <a href="#certifications" class="mobile-link">Credentials</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+    </div>
+
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Aditya Pandita</h1>
-                <h2 class="hero-subtitle">AWS Solutions Architect | Serverless & AI/ML Expert</h2>
-                <p class="hero-description">7+ years architecting cloud solutions | $5M+ revenue impact | Subject Matter Expert in AWS Lambda & API Gateway</p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="#projects" class="btn btn-secondary">View Projects</a>
-                </div>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/adityapandita97/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="mailto:adityapandita97@gmail.com"><i class="fas fa-envelope"></i></a>
-                    <a href="https://github.com/adityapandita97" target="_blank"><i class="fab fa-github"></i></a>
-                </div>
+    <section class="hero" id="hero">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-grid-overlay"></div>
+
+        <!-- Animated AI Chip SVG -->
+        <div class="hero-chip-visual">
+            <svg class="chip-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer glow -->
+                <defs>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="blur"/>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <linearGradient id="chipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#00e8c6;stop-opacity:0.9"/>
+                        <stop offset="100%" style="stop-color:#7c5cff;stop-opacity:0.7"/>
+                    </linearGradient>
+                    <linearGradient id="traceGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#00e8c6;stop-opacity:0"/>
+                        <stop offset="50%" style="stop-color:#00e8c6;stop-opacity:0.6"/>
+                        <stop offset="100%" style="stop-color:#00e8c6;stop-opacity:0"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- Circuit traces - Top -->
+                <line x1="120" y1="100" x2="120" y2="40" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2s" repeatCount="indefinite"/>
+                </line>
+                <line x1="160" y1="100" x2="160" y2="25" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.3s" repeatCount="indefinite"/>
+                </line>
+                <line x1="200" y1="100" x2="200" y2="15" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="1.8s" repeatCount="indefinite"/>
+                </line>
+                <line x1="240" y1="100" x2="240" y2="25" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.5s" repeatCount="indefinite"/>
+                </line>
+                <line x1="280" y1="100" x2="280" y2="40" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.1s" repeatCount="indefinite"/>
+                </line>
+
+                <!-- Circuit traces - Bottom -->
+                <line x1="120" y1="300" x2="120" y2="360" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.2s" repeatCount="indefinite"/>
+                </line>
+                <line x1="160" y1="300" x2="160" y2="375" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="1.9s" repeatCount="indefinite"/>
+                </line>
+                <line x1="200" y1="300" x2="200" y2="385" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.4s" repeatCount="indefinite"/>
+                </line>
+                <line x1="240" y1="300" x2="240" y2="375" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2s" repeatCount="indefinite"/>
+                </line>
+                <line x1="280" y1="300" x2="280" y2="360" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.6s" repeatCount="indefinite"/>
+                </line>
+
+                <!-- Circuit traces - Left -->
+                <line x1="100" y1="140" x2="40" y2="140" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.1s" repeatCount="indefinite"/>
+                </line>
+                <line x1="100" y1="180" x2="25" y2="180" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="1.7s" repeatCount="indefinite"/>
+                </line>
+                <line x1="100" y1="220" x2="25" y2="220" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.3s" repeatCount="indefinite"/>
+                </line>
+                <line x1="100" y1="260" x2="40" y2="260" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2s" repeatCount="indefinite"/>
+                </line>
+
+                <!-- Circuit traces - Right -->
+                <line x1="300" y1="140" x2="360" y2="140" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.4s" repeatCount="indefinite"/>
+                </line>
+                <line x1="300" y1="180" x2="375" y2="180" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="1.9s" repeatCount="indefinite"/>
+                </line>
+                <line x1="300" y1="220" x2="375" y2="220" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.2s" repeatCount="indefinite"/>
+                </line>
+                <line x1="300" y1="260" x2="360" y2="260" stroke="url(#traceGrad)" stroke-width="1.5" opacity="0.4">
+                    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2.5s" repeatCount="indefinite"/>
+                </line>
+
+                <!-- Pin dots -->
+                <g fill="#00e8c6" opacity="0.6">
+                    <circle cx="120" cy="40" r="2.5"/><circle cx="160" cy="25" r="2.5"/>
+                    <circle cx="200" cy="15" r="2.5"/><circle cx="240" cy="25" r="2.5"/>
+                    <circle cx="280" cy="40" r="2.5"/>
+                    <circle cx="120" cy="360" r="2.5"/><circle cx="160" cy="375" r="2.5"/>
+                    <circle cx="200" cy="385" r="2.5"/><circle cx="240" cy="375" r="2.5"/>
+                    <circle cx="280" cy="360" r="2.5"/>
+                    <circle cx="40" cy="140" r="2.5"/><circle cx="25" cy="180" r="2.5"/>
+                    <circle cx="25" cy="220" r="2.5"/><circle cx="40" cy="260" r="2.5"/>
+                    <circle cx="360" cy="140" r="2.5"/><circle cx="375" cy="180" r="2.5"/>
+                    <circle cx="375" cy="220" r="2.5"/><circle cx="360" cy="260" r="2.5"/>
+                </g>
+
+                <!-- Main chip body -->
+                <rect x="100" y="100" width="200" height="200" rx="12" ry="12"
+                    fill="none" stroke="url(#chipGrad)" stroke-width="2" filter="url(#glow)"/>
+
+                <!-- Inner die -->
+                <rect x="130" y="130" width="140" height="140" rx="6" ry="6"
+                    fill="rgba(0, 232, 198, 0.03)" stroke="rgba(0, 232, 198, 0.2)" stroke-width="1"/>
+
+                <!-- Circuit pattern inside chip -->
+                <g stroke="rgba(0, 232, 198, 0.15)" stroke-width="0.8" fill="none">
+                    <path d="M150 170 L180 170 L180 150 L210 150"/>
+                    <path d="M150 200 L190 200"/>
+                    <path d="M150 230 L170 230 L170 250 L200 250"/>
+                    <path d="M250 160 L220 160 L220 190 L250 190"/>
+                    <path d="M250 220 L230 220 L230 240 L250 240"/>
+                </g>
+
+                <!-- Chip center glow -->
+                <circle cx="200" cy="200" r="20" fill="none" stroke="rgba(0, 232, 198, 0.3)" stroke-width="1">
+                    <animate attributeName="r" values="18;22;18" dur="3s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="200" cy="200" r="8" fill="rgba(0, 232, 198, 0.15)">
+                    <animate attributeName="r" values="6;10;6" dur="3s" repeatCount="indefinite"/>
+                </circle>
+
+                <!-- AI text -->
+                <text x="200" y="205" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                    font-size="12" font-weight="700" fill="#00e8c6" opacity="0.8">AI</text>
+
+                <!-- Corner accents -->
+                <g stroke="#00e8c6" stroke-width="1.5" opacity="0.3">
+                    <path d="M100 115 L100 100 L115 100"/>
+                    <path d="M285 100 L300 100 L300 115"/>
+                    <path d="M300 285 L300 300 L285 300"/>
+                    <path d="M115 300 L100 300 L100 285"/>
+                </g>
+
+                <!-- Animated data points traveling along traces -->
+                <circle r="2" fill="#00e8c6" opacity="0.9">
+                    <animateMotion dur="2s" repeatCount="indefinite" path="M200 15 L200 100"/>
+                </circle>
+                <circle r="2" fill="#7c5cff" opacity="0.9">
+                    <animateMotion dur="2.5s" repeatCount="indefinite" path="M375 180 L300 180"/>
+                </circle>
+                <circle r="2" fill="#00e8c6" opacity="0.9">
+                    <animateMotion dur="1.8s" repeatCount="indefinite" path="M200 300 L200 385"/>
+                </circle>
+                <circle r="2" fill="#7c5cff" opacity="0.9">
+                    <animateMotion dur="2.2s" repeatCount="indefinite" path="M25 220 L100 220"/>
+                </circle>
+            </svg>
+        </div>
+
+        <div class="container hero-content">
+            <div class="hero-label">Solutions Architect II — Amazon Web Services</div>
+            <h1 class="hero-title">
+                <span class="line">Architecting the</span>
+                <span class="line"><span class="accent">cloud infrastructure</span></span>
+                <span class="line">that powers nations.</span>
+            </h1>
+            <p class="hero-subtitle">
+                Serverless SME | Data & AI | Migration & Modernization | 5x AWS Certified | IIT Roorkee (ML) | IIM Kozhikode (MBA) | UWA, MU
+            </p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn-primary">View Projects <i class="fas fa-arrow-down" style="font-size: 0.7rem;"></i></a>
+                <a href="#contact" class="btn-secondary">Get In Touch <i class="fas fa-arrow-right" style="font-size: 0.7rem;"></i></a>
             </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- Circuit Trace Divider -->
+    <div class="circuit-divider">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+            <path class="circuit-trace" d="M0 40 L200 40 L220 20 L400 20 L420 40 L600 40"/>
+            <path class="circuit-trace" d="M600 40 L780 40 L800 60 L950 60 L970 40 L1200 40" style="animation-delay: -1s;"/>
+            <circle class="circuit-dot" cx="220" cy="20" r="3"/>
+            <circle class="circuit-dot-glow" cx="220" cy="20" r="8"/>
+            <circle class="circuit-dot" cx="420" cy="40" r="3"/>
+            <circle class="circuit-dot-glow" cx="420" cy="40" r="8"/>
+            <circle class="circuit-dot" cx="800" cy="60" r="3"/>
+            <circle class="circuit-dot-glow" cx="800" cy="60" r="8"/>
+            <circle class="circuit-dot" cx="970" cy="40" r="3"/>
+            <circle class="circuit-dot-glow" cx="970" cy="40" r="8"/>
+        </svg>
+    </div>
+
+    <!-- Intro / About Section -->
+    <section class="intro section" id="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Results-driven Solutions Architect at AWS with over 7 years of experience leveraging AWS technologies to deliver exceptional customer support and solutions. Currently pursuing an MBA from Indian Institute of Management, Kozhikode (IIMK) & UWA.</p>
-                    <p>I specialize in architecting enterprise-grade cloud solutions for government and public sector organizations, with expertise in serverless architectures, AI/ML technologies, and security compliance frameworks.</p>
-                    <div class="about-highlights">
-                        <div class="highlight-item">
-                            <h3>$5M+</h3>
-                            <p>Annual Revenue Generated</p>
-                        </div>
-                        <div class="highlight-item">
-                            <h3>10+</h3>
-                            <p>Government Ministries & PSUs</p>
-                        </div>
-                        <div class="highlight-item">
-                            <h3>5M+</h3>
-                            <p>Smart Meters Managed</p>
-                        </div>
-                        <div class="highlight-item">
-                            <h3>42%</h3>
-                            <p>Cost Reduction Achieved</p>
-                        </div>
+            <p class="intro-text" id="introText">
+                I architect cloud solutions at national scale — from smart grid systems managing millions of meters, to AI-powered platforms that detect energy theft and forecast grid demand, to government portals serving entire populations. As a Solutions Architect at AWS specializing in serverless, data analytics, AI/ML, and cloud migration, I bridge the gap between complex infrastructure challenges and transformative business outcomes for India's public sector and beyond.
+            </p>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stats-bar-circuit"></div>
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-count="5">$0M+</div>
+                    <div class="stat-label">Annual Revenue Generated</div>
+                </div>
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-count="10">0+</div>
+                    <div class="stat-label">Government Ministries & PSUs</div>
+                </div>
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-count="5">0M+</div>
+                    <div class="stat-label">Smart Meters Managed</div>
+                </div>
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-count="42">0%</div>
+                    <div class="stat-label">Cost Reduction Achieved</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Circuit Trace Divider -->
+    <div class="circuit-divider">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+            <path class="circuit-trace" d="M0 60 L150 60 L170 30 L350 30 L370 60 L550 60 L570 40 L750 40"/>
+            <path class="circuit-trace" d="M750 40 L900 40 L920 20 L1050 20 L1070 40 L1200 40" style="animation-delay: -0.5s;"/>
+            <circle class="circuit-dot" cx="170" cy="30" r="3"/>
+            <circle class="circuit-dot-glow" cx="170" cy="30" r="8"/>
+            <circle class="circuit-dot" cx="570" cy="40" r="3"/>
+            <circle class="circuit-dot-glow" cx="570" cy="40" r="8"/>
+            <circle class="circuit-dot" cx="920" cy="20" r="3"/>
+            <circle class="circuit-dot-glow" cx="920" cy="20" r="8"/>
+        </svg>
+    </div>
+
+    <!-- Expertise Section -->
+    <section class="section expertise-section" id="expertise">
+        <div class="circuit-bg">
+            <svg width="100%" height="100%" style="position:absolute;inset:0;" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="circuitPattern" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+                        <path d="M10 100 L50 100 L60 80 L100 80" stroke="rgba(0,232,198,0.04)" stroke-width="1" fill="none"/>
+                        <path d="M100 80 L100 40 L140 40" stroke="rgba(0,232,198,0.04)" stroke-width="1" fill="none"/>
+                        <path d="M140 160 L180 160 L190 140" stroke="rgba(0,232,198,0.04)" stroke-width="1" fill="none"/>
+                        <circle cx="60" cy="80" r="2" fill="rgba(0,232,198,0.06)"/>
+                        <circle cx="100" cy="40" r="2" fill="rgba(0,232,198,0.06)"/>
+                        <circle cx="190" cy="140" r="2" fill="rgba(0,232,198,0.06)"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#circuitPattern)"/>
+            </svg>
+        </div>
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">What I Do</div>
+                <h2 class="section-title">Technical Expertise</h2>
+                <p class="section-description">
+                    Deep specialization across serverless, AI/ML, data analytics, migration, cloud infrastructure, and security — with a focus on government and enterprise-scale deployments on AWS.
+                </p>
+            </div>
+            <div class="expertise-grid reveal">
+                <div class="expertise-card">
+                    <i class="fas fa-bolt expertise-card-bg-icon"></i>
+                    <div class="expertise-icon"><i class="fas fa-bolt"></i> 01</div>
+                    <h3>Serverless & Event-Driven</h3>
+                    <p>Subject Matter Expert in Lambda & API Gateway. Designing event-driven, cost-efficient architectures that scale from zero to millions of requests — powering national-scale platforms with zero server management.</p>
+                    <div class="expertise-services">
+                        <span class="service-tag">AWS Lambda</span>
+                        <span class="service-tag">API Gateway</span>
+                        <span class="service-tag">Step Functions</span>
+                        <span class="service-tag">EventBridge</span>
+                        <span class="service-tag">SQS</span>
+                        <span class="service-tag">SNS</span>
+                        <span class="service-tag">AppSync</span>
+                        <span class="service-tag">DynamoDB</span>
+                        <span class="service-tag">Fargate</span>
+                    </div>
+                </div>
+                <div class="expertise-card">
+                    <i class="fas fa-brain expertise-card-bg-icon"></i>
+                    <div class="expertise-icon"><i class="fas fa-brain"></i> 02</div>
+                    <h3>AI/ML & Generative AI</h3>
+                    <p>Building intelligent platforms — from computer vision for solar panel analysis, to multi-agent chatbots for grid intelligence, to ML-based theft detection and load forecasting for power utilities.</p>
+                    <div class="expertise-services">
+                        <span class="service-tag">Amazon Bedrock</span>
+                        <span class="service-tag">SageMaker</span>
+                        <span class="service-tag">Rekognition</span>
+                        <span class="service-tag">Lex</span>
+                        <span class="service-tag">Comprehend</span>
+                        <span class="service-tag">Textract</span>
+                        <span class="service-tag">Kendra</span>
+                        <span class="service-tag">Personalize</span>
+                        <span class="service-tag">Forecast</span>
+                    </div>
+                </div>
+                <div class="expertise-card">
+                    <i class="fas fa-database expertise-card-bg-icon"></i>
+                    <div class="expertise-icon"><i class="fas fa-database"></i> 03</div>
+                    <h3>Data & Analytics</h3>
+                    <p>Architecting end-to-end data pipelines from ingestion to visualization — building real-time dashboards, ETL workflows, data lakes, and BI platforms for operational intelligence at enterprise scale.</p>
+                    <div class="expertise-services">
+                        <span class="service-tag">Amazon Redshift</span>
+                        <span class="service-tag">QuickSight</span>
+                        <span class="service-tag">Kinesis</span>
+                        <span class="service-tag">AWS Glue</span>
+                        <span class="service-tag">Athena</span>
+                        <span class="service-tag">EMR</span>
+                        <span class="service-tag">Lake Formation</span>
+                        <span class="service-tag">OpenSearch</span>
+                        <span class="service-tag">MSK</span>
+                    </div>
+                </div>
+                <div class="expertise-card">
+                    <i class="fas fa-arrows-rotate expertise-card-bg-icon"></i>
+                    <div class="expertise-icon"><i class="fas fa-arrows-rotate"></i> 04</div>
+                    <h3>Migration & Modernization</h3>
+                    <p>Leading large-scale migrations from on-premise and VMware to AWS — modernizing legacy systems into cloud-native architectures with minimal downtime using proven migration methodologies.</p>
+                    <div class="expertise-services">
+                        <span class="service-tag">AWS MGN</span>
+                        <span class="service-tag">DMS</span>
+                        <span class="service-tag">Migration Hub</span>
+                        <span class="service-tag">SCT</span>
+                        <span class="service-tag">Application Discovery</span>
+                        <span class="service-tag">Transfer Family</span>
+                        <span class="service-tag">CloudEndure</span>
+                    </div>
+                </div>
+                <div class="expertise-card">
+                    <i class="fas fa-cloud expertise-card-bg-icon"></i>
+                    <div class="expertise-icon"><i class="fas fa-cloud"></i> 05</div>
+                    <h3>Cloud Infra & Disaster Recovery</h3>
+                    <p>Designing multi-region, highly available architectures with end-to-end DR strategies achieving lowest RPO/RTO. Expertise across compute, storage, networking, and infrastructure-as-code.</p>
+                    <div class="expertise-services">
+                        <span class="service-tag">EC2</span>
+                        <span class="service-tag">ECS / EKS</span>
+                        <span class="service-tag">VPC</span>
+                        <span class="service-tag">Transit Gateway</span>
+                        <span class="service-tag">Route 53</span>
+                        <span class="service-tag">CloudFront</span>
+                        <span class="service-tag">Direct Connect</span>
+                        <span class="service-tag">Elastic DR</span>
+                        <span class="service-tag">AWS Backup</span>
+                        <span class="service-tag">Aurora Global</span>
+                    </div>
+                </div>
+                <div class="expertise-card">
+                    <i class="fas fa-shield-halved expertise-card-bg-icon"></i>
+                    <div class="expertise-icon"><i class="fas fa-shield-halved"></i> 06</div>
+                    <h3>Security & Compliance</h3>
+                    <p>Building secure-by-design architectures meeting government compliance standards — implementing data sovereignty, encryption at rest and in transit, fine-grained access controls, and continuous monitoring.</p>
+                    <div class="expertise-services">
+                        <span class="service-tag">IAM</span>
+                        <span class="service-tag">KMS</span>
+                        <span class="service-tag">WAF</span>
+                        <span class="service-tag">Shield</span>
+                        <span class="service-tag">GuardDuty</span>
+                        <span class="service-tag">Security Hub</span>
+                        <span class="service-tag">Inspector</span>
+                        <span class="service-tag">Macie</span>
+                        <span class="service-tag">CloudTrail</span>
+                        <span class="service-tag">Config</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Technical Expertise</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <i class="fas fa-cloud"></i>
-                    <h3>Cloud Architecture</h3>
-                    <p>AWS Expert | Multi-cloud solution design | Infrastructure as Code with CloudFormation</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-server"></i>
-                    <h3>Serverless (SME)</h3>
-                    <p>AWS Lambda | API Gateway | Step Functions | EventBridge | AppSync</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-brain"></i>
-                    <h3>AI/ML & GenAI</h3>
-                    <p>Amazon Bedrock | SageMaker | Rekognition | Q Developer | MLOps</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Security & Compliance</h3>
-                    <p>IAM | WAF | Security Hub | GuardDuty | MeitY | FedRAMP | ISO 27001</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-database"></i>
-                    <h3>Database & Analytics</h3>
-                    <p>RDS | Redshift | Athena | Kinesis | QuickSight | Data Lakes</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-network-wired"></i>
-                    <h3>Networking</h3>
-                    <p>VPC | Load Balancing | Route 53 | CloudFront | Direct Connect</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-code"></i>
-                    <h3>DevOps & Programming</h3>
-                    <p>Python (Boto3) | Bash | REST API | CI/CD | AWS CLI</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-exchange-alt"></i>
-                    <h3>Migration & Modernization</h3>
-                    <p>Application Migration Service | DMS | DataSync | Well-Architected Framework</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Circuit Trace Divider -->
+    <div class="circuit-divider">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+            <path class="circuit-trace" d="M0 30 L250 30 L270 50 L500 50 L520 30 L700 30"/>
+            <path class="circuit-trace" d="M700 30 L850 30 L870 55 L1000 55 L1020 30 L1200 30" style="animation-delay: -1.5s;"/>
+            <circle class="circuit-dot" cx="270" cy="50" r="3"/>
+            <circle class="circuit-dot-glow" cx="270" cy="50" r="8"/>
+            <circle class="circuit-dot" cx="520" cy="30" r="3"/>
+            <circle class="circuit-dot-glow" cx="520" cy="30" r="8"/>
+            <circle class="circuit-dot" cx="870" cy="55" r="3"/>
+            <circle class="circuit-dot-glow" cx="870" cy="55" r="8"/>
+        </svg>
+    </div>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <section class="section projects-section" id="projects">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
+            <div class="reveal">
+                <div class="section-label">Selected Work</div>
+                <h2 class="section-title">Industry Projects</h2>
+                <p class="section-description">
+                    High-impact engagements across energy, government, and enterprise — each solving a unique challenge at national scale.
+                </p>
+            </div>
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>PGCIL Smart Metering Infrastructure</h3>
-                        <span class="project-tag">Enterprise Solution</span>
+
+                <!-- Featured Project: Smart Grid -->
+                <div class="project-card featured reveal">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-number">01</span>
+                            <div class="project-tags">
+                                <span class="project-tag">Energy</span>
+                                <span class="project-tag orange">Enterprise</span>
+                            </div>
+                        </div>
+                        <h3>National Smart Grid Infrastructure</h3>
+                        <p>Architected the cloud backbone for India's Advanced Metering Infrastructure (AMI) under PGCIL — enabling real-time monitoring, analytics, and management of 5M+ smart electricity meters across the national grid.</p>
+                        <div class="project-metrics">
+                            <div class="project-metric">
+                                <span class="project-metric-value">5M+</span>
+                                <span class="project-metric-label">Meters Managed</span>
+                            </div>
+                            <div class="project-metric">
+                                <span class="project-metric-value">42%</span>
+                                <span class="project-metric-label">Cost Reduction</span>
+                            </div>
+                            <div class="project-metric">
+                                <span class="project-metric-value">99.9%</span>
+                                <span class="project-metric-label">Uptime SLA</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>Architected cloud solution for 5+ million smart meters across PAN India, achieving 42% cost reduction through optimized AWS service selection and right-sizing strategies.</p>
-                    <div class="project-tech">
-                        <span>AWS IoT</span>
-                        <span>Lambda</span>
-                        <span>S3</span>
-                        <span>CloudFormation</span>
+                    <div class="project-visual">
+                        <canvas class="project-visual-canvas" id="projectCanvas"></canvas>
+                        <div class="arch-flow">
+                            <div class="arch-layer">
+                                <div class="arch-box glow">Smart Meters (5M+)</div>
+                            </div>
+                            <div class="arch-arrow"><div class="data-dot"></div></div>
+                            <div class="arch-layer">
+                                <div class="arch-box glow">IoT Core</div>
+                                <div class="arch-box">API Gateway</div>
+                                <div class="arch-box">VPC</div>
+                            </div>
+                            <div class="arch-arrow"><div class="data-dot"></div></div>
+                            <div class="arch-layer">
+                                <div class="arch-box">Lambda</div>
+                                <div class="arch-box">Kinesis</div>
+                                <div class="arch-box">SQS</div>
+                                <div class="arch-box">Step Functions</div>
+                            </div>
+                            <div class="arch-arrow"><div class="data-dot"></div></div>
+                            <div class="arch-layer">
+                                <div class="arch-box">DynamoDB</div>
+                                <div class="arch-box">Timestream</div>
+                                <div class="arch-box glow">QuickSight</div>
+                            </div>
+                            <div class="arch-arrow"><div class="data-dot"></div></div>
+                            <div class="arch-layer">
+                                <div class="arch-box glow">Real-time Analytics Dashboard</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <!-- Project 2: MNRE Solar Rooftop AI -->
+                <div class="project-card reveal">
                     <div class="project-header">
-                        <h3>IPv6 Smart Meters Migration Solution</h3>
-                        <span class="project-tag">Published</span>
+                        <span class="project-number">02</span>
+                        <div class="project-tags">
+                            <span class="project-tag">AI / ML</span>
+                            <span class="project-tag purple">Government</span>
+                        </div>
                     </div>
-                    <p>Developed global IPv6 Smart Meters Migration solution published on AWS Industries Blog, providing NAT proxy architecture for AMI/SPs transitioning to cloud infrastructure.</p>
-                    <div class="project-tech">
-                        <span>IPv6</span>
-                        <span>NAT Gateway</span>
-                        <span>VPC</span>
-                        <span>IoT Core</span>
-                    </div>
-                    <a href="https://aws.amazon.com/blogs/industries/ipv6-smart-meter-migration-to-aws-a-nat-proxy-solution-for-amisps/" target="_blank" class="project-link">View Article <i class="fas fa-external-link-alt"></i></a>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Grid Intelligence Platform</h3>
-                        <span class="project-tag">AI-Powered</span>
-                    </div>
-                    <p>Integrated platform combining Amazon QuickSight with Amazon Bedrock Agents for intelligent grid operations, delivering self-service analytics and AI-powered consumption analysis.</p>
-                    <div class="project-tech">
-                        <span>Amazon Bedrock</span>
-                        <span>QuickSight</span>
-                        <span>Redshift</span>
-                        <span>Lambda</span>
+                    <div class="project-content">
+                        <h3>MNRE Solar Rooftop AI Analysis</h3>
+                        <p>Built a multi-stage image validation pipeline for India's rooftop solar subsidy program (MNRE). Images submitted for subsidy claims go through quality checks via Amazon Rekognition, duplicate detection using vector search indexing in RDS, and custom ML checks for panel inclination and image morphing detection using SageMaker AI and Bedrock LLMs — all orchestrated by AWS Step Functions.</p>
+                        <div class="project-metrics">
+                            <div class="project-metric">
+                                <span class="project-metric-value">3-Stage</span>
+                                <span class="project-metric-label">AI Validation</span>
+                            </div>
+                            <div class="project-metric">
+                                <span class="project-metric-value">Fraud</span>
+                                <span class="project-metric-label">Prevention</span>
+                            </div>
+                        </div>
+                        <a href="https://pmsuryaghar.gov.in" target="_blank" class="project-link">View Live Platform <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <!-- Project 3: Polaris - Theft & Load Forecasting -->
+                <div class="project-card reveal">
                     <div class="project-header">
-                        <h3>PMSG 2.0 Portal</h3>
-                        <span class="project-tag">Government</span>
+                        <span class="project-number">03</span>
+                        <div class="project-tags">
+                            <span class="project-tag">AI / ML</span>
+                            <span class="project-tag orange">Energy</span>
+                        </div>
                     </div>
-                    <p>Architected Ministry of New and Renewable Energy's PM Surya Ghar platform with comprehensive security frameworks including AWS WAF, Network Firewall, Security Hub, and GuardDuty.</p>
-                    <div class="project-tech">
-                        <span>WAF</span>
-                        <span>Network Firewall</span>
-                        <span>Security Hub</span>
-                        <span>GuardDuty</span>
+                    <div class="project-content">
+                        <h3>Polaris — Energy Theft & Load Forecasting</h3>
+                        <p>Developed ML use cases for power utilities — energy theft detection using anomaly models to identify tampered meters and unauthorized consumption, and load forecasting to predict grid demand patterns for capacity planning and optimization across distribution networks.</p>
+                        <div class="project-metrics">
+                            <div class="project-metric">
+                                <span class="project-metric-value">Theft</span>
+                                <span class="project-metric-label">Detection</span>
+                            </div>
+                            <div class="project-metric">
+                                <span class="project-metric-value">Demand</span>
+                                <span class="project-metric-label">Forecasting</span>
+                            </div>
+                        </div>
                     </div>
-                    <a href="https://pmsuryaghar.gov.in/" target="_blank" class="project-link">View Portal <i class="fas fa-external-link-alt"></i></a>
                 </div>
 
-                <div class="project-card">
+                <!-- Project 4: AI Insights DISCOM -->
+                <div class="project-card reveal">
                     <div class="project-header">
-                        <h3>Image Insight Application</h3>
-                        <span class="project-tag">Serverless</span>
+                        <span class="project-number">04</span>
+                        <div class="project-tags">
+                            <span class="project-tag">GenAI</span>
+                            <span class="project-tag purple">Open Source</span>
+                        </div>
                     </div>
-                    <p>Created serverless application leveraging Amazon Rekognition and Amazon Bedrock for automated image analysis and description generation. Featured on AWS Serverless Land.</p>
-                    <div class="project-tech">
-                        <span>Rekognition</span>
-                        <span>Bedrock</span>
-                        <span>Lambda</span>
-                        <span>Python</span>
+                    <div class="project-content">
+                        <h3>AI Insights — DISCOM Capacity Planning</h3>
+                        <p>End-to-end AI-powered capacity planning platform for power DISCOMs analyzing four growth vectors — consumer load, EV charging expansion, solar DER generation, and battery storage — across 411K+ records and 11 cities. Features multi-agent AI chat powered by Bedrock Claude and interactive React dashboards.</p>
+                        <div class="project-metrics">
+                            <div class="project-metric">
+                                <span class="project-metric-value">411K+</span>
+                                <span class="project-metric-label">Records Analyzed</span>
+                            </div>
+                            <div class="project-metric">
+                                <span class="project-metric-value">Multi-Agent</span>
+                                <span class="project-metric-label">AI Chat</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/adityapandita97/AI-Insights-DISCOM" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <a href="https://serverlessland.com/repos/image-insight-nodejs" target="_blank" class="project-link">View on Serverless Land <i class="fas fa-external-link-alt"></i></a>
                 </div>
 
-                <div class="project-card">
+                <!-- Project 5: Power Utilities Visualization -->
+                <div class="project-card reveal">
                     <div class="project-header">
-                        <h3>NRL VMware Migration</h3>
-                        <span class="project-tag">Migration</span>
+                        <span class="project-number">05</span>
+                        <div class="project-tags">
+                            <span class="project-tag">Data & Analytics</span>
+                            <span class="project-tag orange">Open Source</span>
+                        </div>
                     </div>
-                    <p>Led large-scale Infrastructure Event Management (IEM) initiative for Numaligarh Refinery Ltd's VMware workload migration to AWS, working with implementation partners.</p>
-                    <div class="project-tech">
-                        <span>Application Migration Service</span>
-                        <span>EC2</span>
-                        <span>EBS</span>
-                        <span>VPC</span>
+                    <div class="project-content">
+                        <h3>Power Utilities Visualization Pipeline</h3>
+                        <p>Automated IaC solution for power utilities analytics — CloudFormation deploys an S3-to-Lambda-to-Redshift ETL pipeline with QuickSight dashboards, analyzing interval meter readings (kW, kWh, power factor) at 15-minute granularity. Full end-to-end data visualization from raw CSV to executive dashboards.</p>
+                        <div class="project-metrics">
+                            <div class="project-metric">
+                                <span class="project-metric-value">End-to-End</span>
+                                <span class="project-metric-label">ETL Pipeline</span>
+                            </div>
+                            <div class="project-metric">
+                                <span class="project-metric-value">IaC</span>
+                                <span class="project-metric-label">CloudFormation</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/adityapandita97/Power-Utilities-Visualization-Project" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 6: Serverless RAG Chatbot -->
+                <div class="project-card reveal">
+                    <div class="project-header">
+                        <span class="project-number">06</span>
+                        <div class="project-tags">
+                            <span class="project-tag">GenAI</span>
+                            <span class="project-tag purple">Serverless</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Serverless RAG — Chat with PDF</h3>
+                        <p>Built a fully serverless Retrieval Augmented Generation system on AWS — upload a PDF to S3, ask questions in plain English, get answers grounded in the actual document. Uses Bedrock (Titan Embeddings + Claude), OpenSearch Serverless as vector store, and AWS CDK for one-command deployment.</p>
+                        <div class="project-metrics">
+                            <div class="project-metric">
+                                <span class="project-metric-value">RAG</span>
+                                <span class="project-metric-label">Architecture</span>
+                            </div>
+                            <div class="project-metric">
+                                <span class="project-metric-value">Zero</span>
+                                <span class="project-metric-label">Hallucination</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 7: IPv6 Smart Meter Migration -->
+                <div class="project-card reveal">
+                    <div class="project-header">
+                        <span class="project-number">07</span>
+                        <div class="project-tags">
+                            <span class="project-tag">Networking</span>
+                            <span class="project-tag purple">Published</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>IPv6 Smart Meter Migration</h3>
+                        <p>Designed the IPv6 migration strategy for IoT-scale smart meter networks — solving address exhaustion for millions of connected devices. Solution published on the AWS Industries Blog.</p>
+                        <div class="project-metrics">
+                            <div class="project-metric">
+                                <span class="project-metric-value">Millions</span>
+                                <span class="project-metric-label">IoT Devices</span>
+                            </div>
+                            <div class="project-metric">
+                                <span class="project-metric-value">Published</span>
+                                <span class="project-metric-label">AWS Blog</span>
+                            </div>
+                        </div>
+                        <a href="#" class="project-link">Read on AWS Blog <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 8: Enterprise Cloud Migration -->
+                <div class="project-card reveal">
+                    <div class="project-header">
+                        <span class="project-number">08</span>
+                        <div class="project-tags">
+                            <span class="project-tag">Migration</span>
+                            <span class="project-tag orange">Enterprise</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Enterprise Cloud Migration — NRL</h3>
+                        <p>Led the end-to-end migration of NRL's VMware infrastructure to AWS — modernizing legacy workloads using AWS MGN and DMS, reducing operational costs, and implementing DR strategies with lowest RPO/RTO targets.</p>
+                        <div class="project-metrics">
+                            <div class="project-metric">
+                                <span class="project-metric-value">Full Stack</span>
+                                <span class="project-metric-label">VMware to AWS</span>
+                            </div>
+                            <div class="project-metric">
+                                <span class="project-metric-value">Lowest</span>
+                                <span class="project-metric-label">RPO / RTO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 9: Serverless Computer Vision -->
+                <div class="project-card reveal">
+                    <div class="project-header">
+                        <span class="project-number">09</span>
+                        <div class="project-tags">
+                            <span class="project-tag">Serverless</span>
+                            <span class="project-tag purple">Published</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Serverless Computer Vision</h3>
+                        <p>End-to-end serverless image analysis using AWS Lambda, Rekognition, and API Gateway — demonstrating enterprise-grade computer vision without managing infrastructure. Published on AWS Serverless Land.</p>
+                        <div class="project-metrics">
+                            <div class="project-metric">
+                                <span class="project-metric-value">Zero</span>
+                                <span class="project-metric-label">Infrastructure Mgmt</span>
+                            </div>
+                            <div class="project-metric">
+                                <span class="project-metric-value">Published</span>
+                                <span class="project-metric-label">Serverless Land</span>
+                            </div>
+                        </div>
+                        <a href="#" class="project-link">View on Serverless Land <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Certifications Section -->
-    <section id="certifications" class="certifications">
+    <!-- Circuit Trace Divider -->
+    <div class="circuit-divider">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+            <path class="circuit-trace" d="M0 50 L180 50 L200 25 L450 25 L470 50 L650 50"/>
+            <path class="circuit-trace" d="M650 50 L800 50 L820 65 L1000 65 L1020 50 L1200 50" style="animation-delay: -2s;"/>
+            <circle class="circuit-dot" cx="200" cy="25" r="3"/>
+            <circle class="circuit-dot-glow" cx="200" cy="25" r="8"/>
+            <circle class="circuit-dot" cx="650" cy="50" r="3"/>
+            <circle class="circuit-dot-glow" cx="650" cy="50" r="8"/>
+            <circle class="circuit-dot" cx="1020" cy="50" r="3"/>
+            <circle class="circuit-dot-glow" cx="1020" cy="50" r="8"/>
+        </svg>
+    </div>
+
+    <!-- Certifications & Achievements Section -->
+    <section class="section" id="certifications">
         <div class="container">
-            <h2 class="section-title">Certifications & Achievements</h2>
-            <div class="cert-grid">
+            <div class="reveal">
+                <div class="section-label">Credentials</div>
+                <h2 class="section-title">Certifications & Recognition</h2>
+                <p class="section-description">
+                    Validated expertise across AWS cloud architecture, development, and emerging technologies.
+                </p>
+            </div>
+            <div class="certs-grid reveal">
                 <div class="cert-card">
-                    <i class="fab fa-aws"></i>
-                    <h3>AWS Certified Solutions Architect</h3>
-                    <p>Professional</p>
+                    <div class="cert-icon"><i class="fas fa-award"></i></div>
+                    <div class="cert-info"><h4>AWS Solutions Architect Professional</h4><p>Advanced cloud architecture design</p></div>
                 </div>
                 <div class="cert-card">
-                    <i class="fab fa-aws"></i>
-                    <h3>AWS Certified Solutions Architect</h3>
-                    <p>Associate</p>
+                    <div class="cert-icon"><i class="fas fa-award"></i></div>
+                    <div class="cert-info"><h4>AWS Solutions Architect Associate</h4><p>Cloud architecture fundamentals</p></div>
                 </div>
                 <div class="cert-card">
-                    <i class="fab fa-aws"></i>
-                    <h3>AWS Certified Developer</h3>
-                    <p>Associate</p>
+                    <div class="cert-icon"><i class="fas fa-code"></i></div>
+                    <div class="cert-info"><h4>AWS Developer Associate</h4><p>Cloud-native development</p></div>
                 </div>
                 <div class="cert-card">
-                    <i class="fas fa-star"></i>
-                    <h3>AWS Subject Matter Expert</h3>
-                    <p>Lambda & API Gateway</p>
+                    <div class="cert-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="cert-info"><h4>SME — Lambda & API Gateway</h4><p>Subject Matter Expert certification</p></div>
                 </div>
                 <div class="cert-card">
-                    <i class="fas fa-robot"></i>
-                    <h3>AWS GenAI Certified</h3>
-                    <p>Technical</p>
+                    <div class="cert-icon"><i class="fas fa-brain"></i></div>
+                    <div class="cert-info"><h4>AWS GenAI Certified</h4><p>Generative AI on AWS</p></div>
                 </div>
                 <div class="cert-card">
-                    <i class="fas fa-award"></i>
-                    <h3>AWS Well-Architected</h3>
-                    <p>Proficient</p>
+                    <div class="cert-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="cert-info"><h4>AWS Well-Architected</h4><p>Framework proficiency</p></div>
                 </div>
             </div>
-            <div class="achievements">
-                <h3>Awards & Recognition</h3>
-                <ul>
-                    <li><i class="fas fa-trophy"></i> "All Rounder" Award - 2 consecutive quarters at AWS</li>
-                    <li><i class="fas fa-trophy"></i> Rising Star Award at AWS</li>
-                    <li><i class="fas fa-trophy"></i> Bolster Award at AWS</li>
-                    <li><i class="fas fa-medal"></i> AWS TFC Gold Member - Serverless & GenAI/ML Communities</li>
-                </ul>
+            <div class="reveal" style="margin-top: 3rem;">
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Awards & Recognition</h3>
+                <div class="awards-list">
+                    <div class="award-item"><i class="fas fa-trophy"></i> "All Rounder" Award — 2 Consecutive Quarters</div>
+                    <div class="award-item"><i class="fas fa-star"></i> Rising Star Award</div>
+                    <div class="award-item"><i class="fas fa-medal"></i> Bolster Award</div>
+                    <div class="award-item"><i class="fas fa-users"></i> AWS TFC Gold — Serverless & GenAI Communities</div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section class="section contact-section" id="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <p>I'm always interested in discussing cloud architecture, serverless solutions, and AI/ML implementations. Feel free to reach out!</p>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:adityapandita97@gmail.com">adityapandita97@gmail.com</a>
+            <div class="reveal"><div class="section-label">Connect</div></div>
+            <div class="contact-grid">
+                <div class="contact-text reveal">
+                    <h3>Let's build something<br>at scale.</h3>
+                    <p>Whether it's a national-scale cloud architecture, a serverless platform, or an AI/ML initiative — I'm always open to discussing how cloud can transform outcomes.</p>
+                    <div class="contact-links">
+                        <a href="mailto:adityapandita97@gmail.com" class="contact-link">
+                            <div class="contact-link-icon"><i class="fas fa-envelope"></i></div>
+                            adityapandita97@gmail.com
+                        </a>
+                        <a href="tel:+919149609140" class="contact-link">
+                            <div class="contact-link-icon"><i class="fas fa-phone"></i></div>
+                            +91 914 960 9140
+                        </a>
+                        <a href="https://linkedin.com/in/adityapandita97" target="_blank" class="contact-link">
+                            <div class="contact-link-icon"><i class="fab fa-linkedin-in"></i></div>
+                            linkedin.com/in/adityapandita97
+                        </a>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <a href="tel:+919149609140">+91 9149609140</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <a href="https://www.linkedin.com/in/adityapandita97/" target="_blank">linkedin.com/in/adityapandita97</a>
+                </div>
+                <div class="contact-visual reveal">
+                    <div class="contact-card-visual">
+                        <svg class="contact-chip-icon" viewBox="0 0 60 60">
+                            <rect x="10" y="10" width="40" height="40" rx="4" fill="none" stroke="rgba(0,232,198,0.3)" stroke-width="1"/>
+                            <rect x="18" y="18" width="24" height="24" rx="2" fill="none" stroke="rgba(0,232,198,0.15)" stroke-width="0.5"/>
+                            <line x1="20" y1="10" x2="20" y2="2" stroke="rgba(0,232,198,0.2)" stroke-width="1"/>
+                            <line x1="30" y1="10" x2="30" y2="2" stroke="rgba(0,232,198,0.2)" stroke-width="1"/>
+                            <line x1="40" y1="10" x2="40" y2="2" stroke="rgba(0,232,198,0.2)" stroke-width="1"/>
+                            <line x1="20" y1="50" x2="20" y2="58" stroke="rgba(0,232,198,0.2)" stroke-width="1"/>
+                            <line x1="30" y1="50" x2="30" y2="58" stroke="rgba(0,232,198,0.2)" stroke-width="1"/>
+                            <line x1="40" y1="50" x2="40" y2="58" stroke="rgba(0,232,198,0.2)" stroke-width="1"/>
+                        </svg>
+                        <div class="contact-card-name">Aditya Pandita</div>
+                        <div class="contact-card-role">Solutions Architect II — AWS</div>
+                        <div class="contact-card-divider"></div>
+                        <div class="contact-card-detail">Serverless SME | Data & AI | Migration</div>
+                        <div class="contact-card-detail">5x AWS Certified | Government & Public Sector</div>
+                        <div class="contact-card-detail">IIT Roorkee (ML) | IIM Kozhikode (MBA) | UWA, MU</div>
                     </div>
                 </div>
             </div>
@@ -865,19 +1458,289 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Aditya Pandita. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="https://www.linkedin.com/in/adityapandita97/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:adityapandita97@gmail.com"><i class="fas fa-envelope"></i></a>
-                <a href="https://github.com/adityapandita97" target="_blank"><i class="fab fa-github"></i></a>
+        <div class="container footer-inner">
+            <div class="footer-copy">&copy; 2026 Aditya Pandita. All rights reserved.</div>
+            <div class="footer-socials">
+                <a href="https://linkedin.com/in/adityapandita97" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/adityapandita97" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="mailto:adityapandita97@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile Navigation Toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
+    // ============ HERO CANVAS: Neural Network Particle System ============
+    const canvas = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: null, y: null };
+    const PARTICLE_COUNT = 80;
+    const CONNECTION_DISTANCE = 150;
+    const MOUSE_RADIUS = 200;
 
-        hamburger
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.radius = Math.random() * 2 + 1;
+            this.baseAlpha = Math.random() * 0.5 + 0.1;
+            this.alpha = this.baseAlpha;
+            this.pulseSpeed = Math.random() * 0.02 + 0.01;
+            this.pulseOffset = Math.random() * Math.PI * 2;
+        }
+        update(time) {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            this.alpha = this.baseAlpha + Math.sin(time * this.pulseSpeed + this.pulseOffset) * 0.15;
+            if (mouse.x !== null) {
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MOUSE_RADIUS) {
+                    const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.02;
+                    this.vx += dx * force * 0.01;
+                    this.vy += dy * force * 0.01;
+                    this.alpha = Math.min(1, this.alpha + 0.3);
+                }
+            }
+            this.vx *= 0.99;
+            this.vy *= 0.99;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0, 232, 198, ${this.alpha})`;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius * 3, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0, 232, 198, ${this.alpha * 0.1})`;
+            ctx.fill();
+        }
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+    function drawConnections() {
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < CONNECTION_DISTANCE) {
+                    const alpha = (1 - dist / CONNECTION_DISTANCE) * 0.15;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(0, 232, 198, ${alpha})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    let animTime = 0;
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        animTime++;
+        drawConnections();
+        particles.forEach(p => { p.update(animTime); p.draw(); });
+        requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    document.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    document.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+    // ============ PROJECT VISUAL CANVAS: mini particle bg ============
+    const projCanvas = document.getElementById('projectCanvas');
+    if (projCanvas) {
+        const pCtx = projCanvas.getContext('2d');
+        function resizeProjCanvas() {
+            const rect = projCanvas.parentElement.getBoundingClientRect();
+            projCanvas.width = rect.width;
+            projCanvas.height = rect.height;
+        }
+        resizeProjCanvas();
+        window.addEventListener('resize', resizeProjCanvas);
+
+        let miniParticles = [];
+        for (let i = 0; i < 25; i++) {
+            miniParticles.push({
+                x: Math.random() * 400,
+                y: Math.random() * 300,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                r: Math.random() * 1.5 + 0.5
+            });
+        }
+        function animateProjParticles() {
+            pCtx.clearRect(0, 0, projCanvas.width, projCanvas.height);
+            miniParticles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > projCanvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > projCanvas.height) p.vy *= -1;
+                pCtx.beginPath();
+                pCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                pCtx.fillStyle = 'rgba(0, 232, 198, 0.15)';
+                pCtx.fill();
+            });
+            for (let i = 0; i < miniParticles.length; i++) {
+                for (let j = i + 1; j < miniParticles.length; j++) {
+                    const dx = miniParticles[i].x - miniParticles[j].x;
+                    const dy = miniParticles[i].y - miniParticles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 100) {
+                        pCtx.beginPath();
+                        pCtx.moveTo(miniParticles[i].x, miniParticles[i].y);
+                        pCtx.lineTo(miniParticles[j].x, miniParticles[j].y);
+                        pCtx.strokeStyle = `rgba(0, 232, 198, ${(1 - dist / 100) * 0.08})`;
+                        pCtx.lineWidth = 0.5;
+                        pCtx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateProjParticles);
+        }
+        animateProjParticles();
+    }
+
+    // ============ FLOATING BACKGROUND ICONS ============
+    const floatingContainer = document.getElementById('floatingElements');
+    const iconClasses = ['fa-microchip', 'fa-cloud', 'fa-brain', 'fa-server', 'fa-database', 'fa-network-wired', 'fa-code', 'fa-shield-halved', 'fa-bolt', 'fa-cube'];
+
+    function createFloatingIcon() {
+        const icon = document.createElement('i');
+        icon.className = `fas ${iconClasses[Math.floor(Math.random() * iconClasses.length)]} floating-icon`;
+        icon.style.left = Math.random() * 100 + '%';
+        icon.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
+        icon.style.animationDuration = (Math.random() * 20 + 15) + 's';
+        icon.style.animationDelay = Math.random() * -20 + 's';
+        icon.style.color = `rgba(0, 232, 198, ${Math.random() * 0.04 + 0.02})`;
+        floatingContainer.appendChild(icon);
+        icon.addEventListener('animationend', () => icon.remove());
+    }
+    for (let i = 0; i < 15; i++) createFloatingIcon();
+    setInterval(createFloatingIcon, 3000);
+
+    // ============ DATA STREAM BACKGROUND (for sections) ============
+    function createDataStreams(container) {
+        for (let i = 0; i < 8; i++) {
+            const stream = document.createElement('div');
+            stream.className = 'data-stream';
+            stream.style.left = Math.random() * 100 + '%';
+            stream.style.height = (Math.random() * 100 + 50) + 'px';
+            stream.style.animationDuration = (Math.random() * 4 + 3) + 's';
+            stream.style.animationDelay = Math.random() * -5 + 's';
+            container.appendChild(stream);
+        }
+    }
+
+    // ============ NAVIGATION ============
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.pageYOffset > 50);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // ============ SCROLL REVEAL ============
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 100);
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ============ INTRO TEXT WORD REVEAL ============
+    const introText = document.getElementById('introText');
+    const introContent = introText.textContent.trim();
+    introText.innerHTML = '';
+    const words = introContent.split(/\s+/);
+    const highlightWords = ['cloud', 'infrastructure', 'enterprise', 'national', 'smart', 'grid', 'government', 'serverless', 'AI/ML', 'AI-powered', 'security', 'public', 'sector', 'transformative', 'analytics', 'theft', 'migration', 'AWS'];
+    words.forEach((word, i) => {
+        const span = document.createElement('span');
+        span.className = 'word';
+        if (highlightWords.some(hw => word.toLowerCase().includes(hw.toLowerCase()))) span.classList.add('highlight-word');
+        span.textContent = word;
+        span.style.transitionDelay = `${i * 30}ms`;
+        introText.appendChild(span);
+        if (i < words.length - 1) introText.appendChild(document.createTextNode(' '));
+    });
+    const introObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                introText.querySelectorAll('.word').forEach((span, i) => {
+                    setTimeout(() => {
+                        span.classList.add('active');
+                        if (span.classList.contains('highlight-word')) span.classList.add('highlight');
+                    }, i * 40);
+                });
+                introObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+    introObserver.observe(introText);
+
+    // ============ STATS COUNTER ============
+    document.querySelectorAll('.stat-number').forEach(el => {
+        const countObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(el.dataset.count);
+                    const suffix = el.textContent.replace(/[0-9$]/g, '');
+                    const prefix = el.textContent.match(/^\$/) ? '$' : '';
+                    let current = 0;
+                    const step = target / (1500 / 16);
+                    const counter = setInterval(() => {
+                        current += step;
+                        if (current >= target) { current = target; clearInterval(counter); }
+                        el.textContent = prefix + Math.floor(current) + suffix;
+                    }, 16);
+                    countObs.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        countObs.observe(el);
+    });
+
+    // ============ SMOOTH SCROLL ============
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+            }
+        });
+    });
+    </script>
+</body>
+</html>
