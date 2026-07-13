@@ -31,46 +31,46 @@ Cloud Solutions Architect with 7+ years building enterprise-grade cloud infrastr
 
 ```mermaid
 mindmap
-  root((Cloud and AI<br/>Solutions Architect))
-    Serverless
-      AWS Lambda
-      API Gateway
-      Step Functions
-      EventBridge
-      SQS / SNS
-      DynamoDB
-    AI/ML and GenAI
-      Amazon Bedrock
-      SageMaker
-      Rekognition
-      Textract
-      Comprehend
-      Kendra
-    Data and Analytics
-      Redshift
-      QuickSight
-      Kinesis
-      AWS Glue
-      Athena
-      OpenSearch
-    Migration
-      AWS MGN
-      DMS
-      Migration Hub
-      SCT
-    Cloud Infra and DR
-      EC2
-      ECS / EKS
-      VPC
-      Route 53
-      Aurora
-      Elastic DR
-    Security
-      IAM / KMS
-      WAF / Shield
-      GuardDuty
-      Security Hub
-      CloudTrail
+  root(("☁️ Cloud & AI<br/>Solutions Architect"))
+    (⚡ Serverless)
+      🔧 AWS Lambda
+      🚪 API Gateway
+      🔀 Step Functions
+      📨 EventBridge
+      📬 SQS / SNS
+      ⚡ DynamoDB
+    (🧠 AI / ML / GenAI)
+      🪨 Amazon Bedrock
+      🎓 SageMaker
+      👁️ Rekognition
+      📄 Textract
+      💬 Comprehend
+      🔍 Kendra
+    (📊 Data & Analytics)
+      🏢 Redshift
+      📈 QuickSight
+      🌊 Kinesis
+      🧩 AWS Glue
+      🔎 Athena
+      🗂️ OpenSearch
+    (🔄 Migration)
+      🚚 AWS MGN
+      🔁 DMS
+      🧭 Migration Hub
+      🔧 SCT
+    (☁️ Cloud Infra & DR)
+      🖥️ EC2
+      📦 ECS / EKS
+      🕸️ VPC
+      🌐 Route 53
+      🐘 Aurora
+      🛟 Elastic DR
+    (🛡️ Security)
+      🔐 IAM / KMS
+      🧱 WAF / Shield
+      🛰️ GuardDuty
+      🎯 Security Hub
+      📜 CloudTrail
 ```
 
 **Multi-cloud & Tooling**
@@ -308,8 +308,8 @@ End-to-end serverless image analysis using Lambda, Rekognition, and API Gateway.
 | Award | Details |
 |-------|---------|
 | "All Rounder" Award | 2 consecutive quarters |
-| Rising Star Award | — |
-| Bolster Award | — |
+| Rising Star Award | 2 consecutive quarters |
+| Bolster Award | 2 consecutive quarters |
 | Most Valuable Player (MVP) | 3x — AWS Support Engineering |
 | AWS TFC Gold Member | Serverless & GenAI/ML Communities |
 
