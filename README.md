@@ -94,34 +94,35 @@ mindmap
 Architected the cloud backbone for India's Advanced Metering Infrastructure (AMI) under PGCIL — enabling real-time monitoring, analytics, and management of **5M+ smart electricity meters** across the national grid.
 
 ```mermaid
-flowchart TB
-    M["🔌 Smart Meters<br/>5M+ devices"] --> ING
-    subgraph ING["Ingestion & Security"]
-        direction LR
+flowchart LR
+    M(["🔌 Smart Meters<br/>5M+ devices"]) ==>|telemetry| ING
+    subgraph ING["🛡️ Ingest & Secure"]
+        direction TB
         IOT["IoT Core"]
         AGW["API Gateway"]
         VPC["VPC + Security"]
     end
-    ING --> PROC
-    subgraph PROC["Streaming & Processing"]
-        direction LR
+    ING ==>|stream| PROC
+    subgraph PROC["⚙️ Process"]
+        direction TB
         LAM["Lambda"]
         KIN["Kinesis"]
-        SQS["SQS"]
         SFN["Step Functions"]
     end
-    PROC --> STORE
-    subgraph STORE["Storage & Analytics"]
-        direction LR
+    PROC ==>|persist| STORE
+    subgraph STORE["📊 Store & Visualize"]
+        direction TB
         DDB["DynamoDB"]
         TS["Timestream"]
         QS["QuickSight"]
     end
+    classDef meter fill:#1b7a3d,stroke:#fff,color:#fff,stroke-width:2px;
     classDef edge fill:#232F3E,stroke:#FF9900,color:#fff;
     classDef proc fill:#FF9900,stroke:#232F3E,color:#000;
     classDef data fill:#527FFF,stroke:#fff,color:#fff;
+    class M meter;
     class IOT,AGW,VPC edge;
-    class LAM,KIN,SQS,SFN proc;
+    class LAM,KIN,SFN proc;
     class DDB,TS,QS data;
 ```
 
@@ -138,20 +139,26 @@ flowchart TB
 Built a multi-stage AI image validation pipeline for India's rooftop solar subsidy program. Images submitted for subsidy claims pass through three automated checks:
 
 ```mermaid
-flowchart TB
-    P["🏛️ MNRE Portal"] --> S3["📦 S3 Upload"]
-    S3 --> Q["✅ Quality Check<br/>Rekognition"]
-    S3 --> D["🔁 Duplicate Check<br/>Vector Search / RDS"]
-    S3 --> M["🧠 Custom ML Checks<br/>Inclination · Morphing<br/>SageMaker + Bedrock LLM"]
-    Q --> R{"Decision"}
-    D --> R
-    M --> R
-    R -->|pass| A["✔️ Accepted"]
-    R -->|fail| X["✖️ Rejected"]
+flowchart LR
+    P(["🏛️ MNRE Portal"]) --> S3["📦 S3 Upload"]
+    S3 --> CHK
+    subgraph CHK["🔍 Automated Validation"]
+        direction TB
+        Q["✅ Quality<br/>Rekognition"]
+        D["🔁 Duplicate<br/>Vector Search / RDS"]
+        M["🧠 Custom ML<br/>Inclination · Morphing<br/>SageMaker + Bedrock"]
+    end
+    CHK --> R{"Decision"}
+    R ==>|pass| A(["✔️ Accepted"])
+    R ==>|fail| X(["✖️ Rejected"])
+    classDef portal fill:#527FFF,stroke:#fff,color:#fff,stroke-width:2px;
     classDef svc fill:#232F3E,stroke:#FF9900,color:#fff;
+    classDef dec fill:#FF9900,stroke:#232F3E,color:#000;
     classDef ok fill:#1b7a3d,stroke:#fff,color:#fff;
     classDef no fill:#c0392b,stroke:#fff,color:#fff;
-    class P,S3,Q,D,M svc;
+    class P portal;
+    class S3,Q,D,M svc;
+    class R dec;
     class A ok;
     class X no;
 ```
@@ -176,26 +183,26 @@ ML use cases for power utilities — anomaly-based theft detection to identify t
 End-to-end AI-powered capacity planning for power distribution companies analyzing four growth vectors across **411K+ records** and **11 cities**.
 
 ```mermaid
-flowchart TB
-    subgraph SRC["📊 Data Sources — 411K+ records"]
-        direction LR
+flowchart LR
+    subgraph SRC["📊 Data — 411K+ records"]
+        direction TB
         DT["DT Meters"]
         EV["EV Charging"]
         SO["Solar"]
         BE["BESS"]
     end
-    SRC --> FN
+    SRC ==>|ingest| FN
     subgraph FN["⚙️ 5x Lambda Functions"]
-        direction LR
+        direction TB
         F1["DT Forecast"]
         F2["EV"]
         F3["Solar"]
         F4["Capacity"]
         F5["Chat Orchestrator"]
     end
-    FN --> UI
+    FN ==>|serve| UI
     subgraph UI["🖥️ Experience Layer"]
-        direction LR
+        direction TB
         R["React Dashboard<br/>Chart.js KPIs"]
         C["Multi-Agent AI Chat<br/>Bedrock Claude"]
     end
@@ -219,9 +226,11 @@ Automated IaC solution — CloudFormation deploys an end-to-end ETL pipeline ana
 
 ```mermaid
 flowchart LR
-    A["📄 CSV in S3"] --> B["⚙️ Lambda<br/>Python ETL"] --> C["🗄️ Redshift"] --> D["📊 QuickSight<br/>Dashboards"]
+    A(["📄 CSV in S3"]) ==>|extract| B["⚙️ Lambda<br/>Python ETL"] ==>|load| C[("🗄️ Redshift")] ==>|visualize| D(["📊 QuickSight"])
     classDef n fill:#232F3E,stroke:#FF9900,color:#fff;
-    class A,B,C,D n;
+    classDef db fill:#527FFF,stroke:#fff,color:#fff;
+    class A,B,D n;
+    class C db;
 ```
 
 > **Stack:** CloudFormation (24 resources), S3, Lambda, Redshift, QuickSight, VPC, IAM
@@ -235,16 +244,19 @@ flowchart LR
 Fully serverless Retrieval Augmented Generation system — upload a PDF, ask questions in plain English, get answers grounded in the actual document with zero hallucinations.
 
 ```mermaid
-flowchart TB
-    PDF["📄 PDF"] --> S3["📦 S3"]
-    S3 --> L["⚙️ Lambda<br/>chunk + embed"]
-    L --> OS["🔎 OpenSearch Serverless<br/>vector store"]
-    U["💬 User Query"] --> BR["🧠 Bedrock<br/>Titan Embeddings + Claude"]
-    OS --> BR
-    BR --> ANS["✅ Grounded Answer"]
+flowchart LR
+    PDF(["📄 PDF"]) -->|upload| S3["📦 S3"] -->|trigger| L["⚙️ Lambda<br/>chunk + embed"]
+    L -->|index| OS[("🔎 OpenSearch<br/>vector store")]
+    U(["💬 User Query"]) --> BR
+    OS -->|retrieve| BR{{"🧠 Bedrock<br/>Titan + Claude"}}
+    BR ==>|grounded| ANS(["✅ Answer"])
     classDef svc fill:#232F3E,stroke:#FF9900,color:#fff;
+    classDef db fill:#527FFF,stroke:#fff,color:#fff;
+    classDef ai fill:#8A2BE2,stroke:#fff,color:#fff;
     classDef out fill:#1b7a3d,stroke:#fff,color:#fff;
-    class PDF,S3,L,OS,U,BR svc;
+    class PDF,S3,L,U svc;
+    class OS db;
+    class BR ai;
     class ANS out;
 ```
 
