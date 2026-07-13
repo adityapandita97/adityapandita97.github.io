@@ -2,7 +2,7 @@
 
 # Aditya Pandita
 
-### Solutions Architect II — Amazon Web Services
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=800&color=2F81F7&center=true&vCenter=true&width=720&lines=Solutions+Architect+II+%E2%80%94+Amazon+Web+Services;Serverless+SME+%C2%B7+Data+%26+AI+%C2%B7+Migration+%26+Modernization;Architecting+the+cloud+infrastructure+that+powers+nations" alt="Typing SVG" /></a>
 
 **Serverless SME | Data & AI | Migration & Modernization | 5x AWS Certified**
 
@@ -45,6 +45,18 @@ Cloud Solutions Architect with 7+ years building enterprise-grade cloud infrastr
 │  Transfer Family  CloudEndure   │  │  Elastic DR  Backup  Aurora     │  │  CloudTrail   Config            │
 └─────────────────────────────────┘  └─────────────────────────────────┘  └─────────────────────────────────┘
 ```
+
+**Multi-cloud & Tooling**
+
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white)
+![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
+![Google Cloud](https://img.shields.io/badge/GCP-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)
+![OCI](https://img.shields.io/badge/Oracle%20Cloud-F80000?style=for-the-badge&logo=oracle&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-844FBA?style=for-the-badge&logo=terraform&logoColor=white)
+![AWS CDK](https://img.shields.io/badge/AWS%20CDK-232F3E?style=for-the-badge&logo=amazonaws&logoColor=F90)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
 
 ---
 
@@ -206,14 +218,18 @@ End-to-end serverless image analysis using Lambda, Rekognition, and API Gateway.
 
 <div align="center">
 
-| Certification | Domain |
-|:---:|:---:|
-| **AWS Solutions Architect Professional** | Cloud Architecture |
-| **AWS Solutions Architect Associate** | Cloud Architecture |
-| **AWS Developer Associate** | Development |
-| **SME — Lambda & API Gateway** | Serverless |
-| **AWS GenAI Certified** | Generative AI |
-| **AWS Well-Architected** | Best Practices |
+![SA Pro](https://img.shields.io/badge/AWS%20Certified-Solutions%20Architect%20Professional-232F3E?style=for-the-badge&logo=amazonaws&logoColor=F90)
+![SA Associate](https://img.shields.io/badge/AWS%20Certified-Solutions%20Architect%20Associate-232F3E?style=for-the-badge&logo=amazonaws&logoColor=F90)
+![Developer Associate](https://img.shields.io/badge/AWS%20Certified-Developer%20Associate-232F3E?style=for-the-badge&logo=amazonaws&logoColor=F90)
+![AI Practitioner](https://img.shields.io/badge/AWS%20Certified-AI%20Practitioner-232F3E?style=for-the-badge&logo=amazonaws&logoColor=F90)
+![Cloud Practitioner](https://img.shields.io/badge/AWS%20Certified-Cloud%20Practitioner-232F3E?style=for-the-badge&logo=amazonaws&logoColor=F90)
+
+![Lambda SME](https://img.shields.io/badge/SME-AWS%20Lambda-FF9900?style=for-the-badge&logo=awslambda&logoColor=white)
+![API Gateway SME](https://img.shields.io/badge/SME-API%20Gateway-FF4F8B?style=for-the-badge&logo=amazonapigateway&logoColor=white)
+![GenAI L200](https://img.shields.io/badge/AWS-GenAI%20Technical%20(L200)-8A2BE2?style=for-the-badge&logo=amazon&logoColor=white)
+![Well-Architected](https://img.shields.io/badge/AWS-Well--Architected%20Proficient-232F3E?style=for-the-badge&logo=amazonaws&logoColor=F90)
+
+*Plus AWS Support Engineering awards, Serverless Demonstrated, Digital Sovereignty (Technical), Migration Acceleration Authorized, and 25+ AWS technical & partner training badges.*
 
 </div>
 
@@ -226,6 +242,7 @@ End-to-end serverless image analysis using Lambda, Rekognition, and API Gateway.
 | "All Rounder" Award | 2 consecutive quarters |
 | Rising Star Award | — |
 | Bolster Award | — |
+| Most Valuable Player (MVP) | 3x — AWS Support Engineering |
 | AWS TFC Gold Member | Serverless & GenAI/ML Communities |
 
 ---
@@ -237,6 +254,19 @@ End-to-end serverless image analysis using Lambda, Rekognition, and API Gateway.
 | $5M+ | 10+ | 5M+ | 42% |
 |:---:|:---:|:---:|:---:|
 | Annual Revenue | Govt Ministries & PSUs | Smart Meters Managed | Cost Reduction |
+
+</div>
+
+---
+
+## GitHub Stats
+
+<div align="center">
+
+<img height="170" src="https://github-readme-stats.vercel.app/api?username=adityapandita97&show_icons=true&count_private=true&hide_border=true&theme=tokyonight" alt="stats" />
+<img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=adityapandita97&layout=compact&hide_border=true&theme=tokyonight" alt="top langs" />
+
+<img src="https://github-profile-trophy.vercel.app/?username=adityapandita97&theme=tokyonight&no-frame=true&column=7&margin-w=8" alt="trophies" />
 
 </div>
 
