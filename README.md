@@ -2,7 +2,9 @@
 
 # Aditya Pandita
 
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=800&color=2F81F7&center=true&vCenter=true&width=720&lines=Solutions+Architect+II+%E2%80%94+Amazon+Web+Services;Serverless+SME+%C2%B7+Data+%26+AI+%C2%B7+Migration+%26+Modernization;Architecting+the+cloud+infrastructure+that+powers+nations" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=800&color=2F81F7&center=true&vCenter=true&width=800&lines=Cloud+%26+AI+Solutions+Architect;Serverless+SME+%7C+Data+%26+AI+%7C+Migration+%26+Modernization;Architecting+the+cloud+that+powers+nations" alt="Typing SVG" /></a>
+
+### Cloud & AI Solutions Architect
 
 **Serverless SME | Data & AI | Migration & Modernization | 5x AWS Certified**
 
