@@ -29,23 +29,48 @@ Cloud Solutions Architect with 7+ years building enterprise-grade cloud infrastr
 
 ## Technical Expertise
 
-```
-┌─────────────────────────────────┐  ┌─────────────────────────────────┐  ┌─────────────────────────────────┐
-│  ⚡ SERVERLESS & EVENT-DRIVEN   │  │  🧠 AI/ML & GENERATIVE AI       │  │  📊 DATA & ANALYTICS            │
-│                                 │  │                                 │  │                                 │
-│  AWS Lambda    API Gateway      │  │  Amazon Bedrock   SageMaker     │  │  Amazon Redshift  QuickSight    │
-│  Step Functions EventBridge     │  │  Rekognition      Lex           │  │  Kinesis          AWS Glue      │
-│  SQS  SNS  AppSync  DynamoDB   │  │  Comprehend       Textract      │  │  Athena           EMR           │
-│  Fargate                        │  │  Kendra  Personalize  Forecast  │  │  Lake Formation   OpenSearch    │
-└─────────────────────────────────┘  └─────────────────────────────────┘  └─────────────────────────────────┘
-┌─────────────────────────────────┐  ┌─────────────────────────────────┐  ┌─────────────────────────────────┐
-│  🔄 MIGRATION & MODERNIZATION  │  │  ☁️ CLOUD INFRA & DR             │  │  🛡️ SECURITY & COMPLIANCE       │
-│                                 │  │                                 │  │                                 │
-│  AWS MGN       DMS              │  │  EC2  ECS/EKS    VPC            │  │  IAM  KMS  WAF  Shield         │
-│  Migration Hub SCT              │  │  Transit Gateway  Route 53      │  │  GuardDuty    Security Hub      │
-│  Application Discovery          │  │  CloudFront  Direct Connect     │  │  Inspector    Macie             │
-│  Transfer Family  CloudEndure   │  │  Elastic DR  Backup  Aurora     │  │  CloudTrail   Config            │
-└─────────────────────────────────┘  └─────────────────────────────────┘  └─────────────────────────────────┘
+```mermaid
+mindmap
+  root((Cloud and AI<br/>Solutions Architect))
+    Serverless
+      AWS Lambda
+      API Gateway
+      Step Functions
+      EventBridge
+      SQS / SNS
+      DynamoDB
+    AI/ML and GenAI
+      Amazon Bedrock
+      SageMaker
+      Rekognition
+      Textract
+      Comprehend
+      Kendra
+    Data and Analytics
+      Redshift
+      QuickSight
+      Kinesis
+      AWS Glue
+      Athena
+      OpenSearch
+    Migration
+      AWS MGN
+      DMS
+      Migration Hub
+      SCT
+    Cloud Infra and DR
+      EC2
+      ECS / EKS
+      VPC
+      Route 53
+      Aurora
+      Elastic DR
+    Security
+      IAM / KMS
+      WAF / Shield
+      GuardDuty
+      Security Hub
+      CloudTrail
 ```
 
 **Multi-cloud & Tooling**
@@ -68,24 +93,36 @@ Cloud Solutions Architect with 7+ years building enterprise-grade cloud infrastr
 
 Architected the cloud backbone for India's Advanced Metering Infrastructure (AMI) under PGCIL — enabling real-time monitoring, analytics, and management of **5M+ smart electricity meters** across the national grid.
 
-```
-Smart Meters (5M+)
-        │
-        ▼
-┌──────────────────────────┐
-│  IoT Core  │  API GW     │
-│  VPC       │  Security   │
-└──────────┬───────────────┘
-           ▼
-┌──────────────────────────┐
-│  Lambda    │  Kinesis     │
-│  SQS       │  Step Fn     │
-└──────────┬───────────────┘
-           ▼
-┌──────────────────────────┐
-│  DynamoDB  │  Timestream  │
-│  QuickSight Analytics    │
-└──────────────────────────┘
+```mermaid
+flowchart TB
+    M["🔌 Smart Meters<br/>5M+ devices"] --> ING
+    subgraph ING["Ingestion & Security"]
+        direction LR
+        IOT["IoT Core"]
+        AGW["API Gateway"]
+        VPC["VPC + Security"]
+    end
+    ING --> PROC
+    subgraph PROC["Streaming & Processing"]
+        direction LR
+        LAM["Lambda"]
+        KIN["Kinesis"]
+        SQS["SQS"]
+        SFN["Step Functions"]
+    end
+    PROC --> STORE
+    subgraph STORE["Storage & Analytics"]
+        direction LR
+        DDB["DynamoDB"]
+        TS["Timestream"]
+        QS["QuickSight"]
+    end
+    classDef edge fill:#232F3E,stroke:#FF9900,color:#fff;
+    classDef proc fill:#FF9900,stroke:#232F3E,color:#000;
+    classDef data fill:#527FFF,stroke:#fff,color:#fff;
+    class IOT,AGW,VPC edge;
+    class LAM,KIN,SQS,SFN proc;
+    class DDB,TS,QS data;
 ```
 
 | Metric | Value |
@@ -100,23 +137,23 @@ Smart Meters (5M+)
 
 Built a multi-stage AI image validation pipeline for India's rooftop solar subsidy program. Images submitted for subsidy claims pass through three automated checks:
 
-```
-MNRE Portal → S3 Upload
-                 │
-    ┌────────────┼────────────┐
-    ▼            ▼            ▼
-┌────────┐ ┌──────────┐ ┌──────────────┐
-│Quality │ │Duplicate │ │  Custom ML   │
-│Check   │ │Check     │ │  Checks      │
-│Rekog.  │ │Vector    │ │  Inclination │
-│        │ │Search/RDS│ │  Morphing    │
-└────┬───┘ └────┬─────┘ │  SageMaker   │
-     │          │       │  Bedrock LLM │
-     ▼          ▼       └──────┬───────┘
-     └──────────┴──────────────┘
-                 │
-                 ▼
-        Status: Accepted / Rejected
+```mermaid
+flowchart TB
+    P["🏛️ MNRE Portal"] --> S3["📦 S3 Upload"]
+    S3 --> Q["✅ Quality Check<br/>Rekognition"]
+    S3 --> D["🔁 Duplicate Check<br/>Vector Search / RDS"]
+    S3 --> M["🧠 Custom ML Checks<br/>Inclination · Morphing<br/>SageMaker + Bedrock LLM"]
+    Q --> R{"Decision"}
+    D --> R
+    M --> R
+    R -->|pass| A["✔️ Accepted"]
+    R -->|fail| X["✖️ Rejected"]
+    classDef svc fill:#232F3E,stroke:#FF9900,color:#fff;
+    classDef ok fill:#1b7a3d,stroke:#fff,color:#fff;
+    classDef no fill:#c0392b,stroke:#fff,color:#fff;
+    class P,S3,Q,D,M svc;
+    class A ok;
+    class X no;
 ```
 
 > **Services:** Step Functions, Rekognition, SageMaker AI, Bedrock, RDS (pgvector), S3, Lambda
@@ -138,22 +175,36 @@ ML use cases for power utilities — anomaly-based theft detection to identify t
 
 End-to-end AI-powered capacity planning for power distribution companies analyzing four growth vectors across **411K+ records** and **11 cities**.
 
-```
-┌──────────────────────────────────────────┐
-│           Data Sources (411K+ records)    │
-│  DT Meters │ EV Charging │ Solar │ BESS  │
-└──────────────────┬───────────────────────┘
-                   ▼
-┌──────────────────────────────────────────┐
-│         5x Lambda Functions              │
-│  DT Forecast │ EV │ Solar │ Capacity │   │
-│              Chat Orchestrator           │
-└──────────────────┬───────────────────────┘
-                   ▼
-┌──────────────────────────────────────────┐
-│  React Dashboard  │  Multi-Agent AI Chat │
-│  Chart.js KPIs    │  Bedrock Claude      │
-└──────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph SRC["📊 Data Sources — 411K+ records"]
+        direction LR
+        DT["DT Meters"]
+        EV["EV Charging"]
+        SO["Solar"]
+        BE["BESS"]
+    end
+    SRC --> FN
+    subgraph FN["⚙️ 5x Lambda Functions"]
+        direction LR
+        F1["DT Forecast"]
+        F2["EV"]
+        F3["Solar"]
+        F4["Capacity"]
+        F5["Chat Orchestrator"]
+    end
+    FN --> UI
+    subgraph UI["🖥️ Experience Layer"]
+        direction LR
+        R["React Dashboard<br/>Chart.js KPIs"]
+        C["Multi-Agent AI Chat<br/>Bedrock Claude"]
+    end
+    classDef src fill:#527FFF,stroke:#fff,color:#fff;
+    classDef fn fill:#FF9900,stroke:#232F3E,color:#000;
+    classDef ui fill:#232F3E,stroke:#FF9900,color:#fff;
+    class DT,EV,SO,BE src;
+    class F1,F2,F3,F4,F5 fn;
+    class R,C ui;
 ```
 
 > **Stack:** Lambda, DynamoDB, Bedrock (Claude), API Gateway, React, Chart.js, CloudFormation
@@ -166,8 +217,11 @@ End-to-end AI-powered capacity planning for power distribution companies analyzi
 
 Automated IaC solution — CloudFormation deploys an end-to-end ETL pipeline analyzing interval meter readings at 15-minute granularity.
 
-```
-CSV (S3) → Lambda (Python) → Redshift → QuickSight Dashboards
+```mermaid
+flowchart LR
+    A["📄 CSV in S3"] --> B["⚙️ Lambda<br/>Python ETL"] --> C["🗄️ Redshift"] --> D["📊 QuickSight<br/>Dashboards"]
+    classDef n fill:#232F3E,stroke:#FF9900,color:#fff;
+    class A,B,C,D n;
 ```
 
 > **Stack:** CloudFormation (24 resources), S3, Lambda, Redshift, QuickSight, VPC, IAM
@@ -180,18 +234,18 @@ CSV (S3) → Lambda (Python) → Redshift → QuickSight Dashboards
 
 Fully serverless Retrieval Augmented Generation system — upload a PDF, ask questions in plain English, get answers grounded in the actual document with zero hallucinations.
 
-```
-PDF → S3 → Lambda (chunking + embedding)
-                    │
-                    ▼
-         OpenSearch Serverless
-           (vector store)
-                    │
-      User Query →  ▼
-         Bedrock (Titan Embeddings + Claude)
-                    │
-                    ▼
-            Grounded Answer
+```mermaid
+flowchart TB
+    PDF["📄 PDF"] --> S3["📦 S3"]
+    S3 --> L["⚙️ Lambda<br/>chunk + embed"]
+    L --> OS["🔎 OpenSearch Serverless<br/>vector store"]
+    U["💬 User Query"] --> BR["🧠 Bedrock<br/>Titan Embeddings + Claude"]
+    OS --> BR
+    BR --> ANS["✅ Grounded Answer"]
+    classDef svc fill:#232F3E,stroke:#FF9900,color:#fff;
+    classDef out fill:#1b7a3d,stroke:#fff,color:#fff;
+    class PDF,S3,L,OS,U,BR svc;
+    class ANS out;
 ```
 
 > **Stack:** S3, Lambda, Bedrock (Titan + Claude 3 Haiku), OpenSearch Serverless, API Gateway, CDK
