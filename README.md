@@ -21,7 +21,7 @@
 
 ## About
 
-Cloud Solutions Architect with 7+ years building enterprise-grade cloud infrastructure for government and public sector organizations across India. I specialize in designing serverless architectures, AI/ML platforms, data analytics pipelines, and end-to-end cloud migration strategies — delivering $5M+ annual revenue impact across 10+ government ministries and PSUs.
+Cloud Solutions Architect with 8+ years building enterprise-grade cloud infrastructure for government and public sector organizations across India. I specialize in designing serverless architectures, AI/ML platforms, data analytics pipelines, and end-to-end cloud migration strategies — delivering $5M+ annual revenue impact across 10+ government ministries and PSUs.
 
 **Education:** IIT Roorkee (Machine Learning) | IIM Kozhikode (MBA) | University of Western Australia | Murdoch University
 
